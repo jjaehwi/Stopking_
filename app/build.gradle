@@ -50,4 +50,5 @@ dependencies {
 
     // 툴팁 라이브러리
     implementation 'com.tomergoldst.android:tooltips:1.1.1'
+
 }

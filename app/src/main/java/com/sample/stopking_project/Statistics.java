@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -18,13 +19,13 @@ import android.widget.Toast;
 
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
-
 public class Statistics extends AppCompatActivity implements ToolTipsManager.TipListener, View.OnClickListener {
 
     ImageButton tooltip;
     ToolTipsManager toolTipsManager;
     TextView textView;
     RelativeLayout linearLayout;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +42,15 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         spec.setContent(R.id.tab_content2);
         tabHost.addTab(spec);
 
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setProgress(84);
+
         tooltip = findViewById(R.id.tooltip);
         textView = findViewById(R.id.textView);
         linearLayout = findViewById(R.id.linearlayout);
+
+
+
         // initialize tooltip manager
         toolTipsManager = new ToolTipsManager(this);
         tooltip.setOnClickListener(this);
