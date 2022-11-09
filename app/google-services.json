@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "166565381467",
+    "project_id": "stopking-146b8",
+    "storage_bucket": "stopking-146b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166565381467:android:c94010e53bcd06a9bc467e",
+        "android_client_info": {
+          "package_name": "com.example.project_son"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166565381467-ijasa8kjai0oat26iqf870i54f79b3kk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoerdm2PzMHAgT3eHX3D6fZXi-U9H4zA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166565381467-ijasa8kjai0oat26iqf870i54f79b3kk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166565381467:android:1614359b0d97c53dbc467e",
+        "android_client_info": {
+          "package_name": "com.sample.stopking_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166565381467-ijasa8kjai0oat26iqf870i54f79b3kk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoerdm2PzMHAgT3eHX3D6fZXi-U9H4zA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166565381467-ijasa8kjai0oat26iqf870i54f79b3kk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">stopKing_project</string>
+    <string name="underline"><u>           Stopking</u>
+    </string>
+    <string name="oneDrink_underline">술을 <u><font color='#2196F3'><b>한 번에 얼마나</b></font></u> 드시나요?</string>
+    <string name="sevenDrink_underline">술을 <u><font color='#2196F3'><b>일주일에 몇 번</b></font></u> 드시나요?</string>
+    <string name="drinkBank_underline">술값을 절약하여 <u><font color='#2196F3'><b>모으고 싶은 금액</b></font></u>을 \n입력해주세요!</string>
+    <string name="sevenSmoke_underline">담배를 <u><font color='#2196F3'><b>일주일에 몇 갑</b></font></u> 정도 피우셨나요?</string>
+    <string name="startSmoke_underline">흡연을 <u><font color='#2196F3'><b>시작하신 지는 몇 년</b></font></u> 되셨나요?</string>
+    <string name="smokeBank_underline">담뱃값을 절약하여 <u><font color='#2196F3'><b>모으고 싶은 금액</b></font></u>을\n 입력해주세요!</string>
+</resources>
