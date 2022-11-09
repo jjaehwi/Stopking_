@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/host"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/design_default_color_secondary"
+            android:layout_gravity="bottom"/>
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/tab_content1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Statistics"
+                    android:textSize="48dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="25dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="4">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00 Days |"
+                            android:textSize="28dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_gravity="center"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00 hours |"
+                            android:textSize="28dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_gravity="center"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00 min"
+                            android:textSize="28dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_gravity="center"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/linearlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00 일 동안,"
+                        android:textSize="56dp"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00 번의 음주를 쉬었습니다."
+                        android:textSize="32dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00 병을 마시지 않았습니다."
+                        android:textSize="32dp"
+                        android:layout_marginTop="160dp"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00 시간을 아꼈습니다."
+                        android:textSize="32dp"
+                        android:layout_marginTop="220dp"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00000 원을 아꼈습니다."
+                        android:textSize="32dp"
+                        android:layout_marginTop="280dp"
+                        android:layout_marginLeft="20dp"/>
+
+                    <ImageButton
+                        android:id="@+id/tooltip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="170dp"
+                        android:layout_marginTop="315dp"
+                        android:src="@drawable/smallsize_tab_icon1"/>
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0000 칼로리를 참았습니다."
+                        android:textSize="32dp"
+                        android:layout_marginTop="340dp"
+                        android:layout_marginLeft="20dp"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tab_content2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+        </FrameLayout>
+
+</TabHost>
