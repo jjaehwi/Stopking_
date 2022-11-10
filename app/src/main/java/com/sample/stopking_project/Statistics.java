@@ -19,11 +19,16 @@ import android.widget.Toast;
 
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
+
+import org.checkerframework.checker.regex.qual.Regex;
+import org.checkerframework.framework.qual.Covariant;
+
 public class Statistics extends AppCompatActivity implements ToolTipsManager.TipListener, View.OnClickListener {
 
     ImageButton tooltip;
     ToolTipsManager toolTipsManager;
-    TextView textView;
+    TextView tooltipTextView, textView1, textView2, textView3, textView4, textView5, textView6;
+    TextView textDays, currentDays, guideText1, guideText2, guideText3;
     RelativeLayout linearLayout;
     ProgressBar progressBar;
 
@@ -42,29 +47,61 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         spec.setContent(R.id.tab_content2);
         tabHost.addTab(spec);
 
-        progressBar = findViewById(R.id.progressbar);
-        progressBar.setProgress(84);
-
         tooltip = findViewById(R.id.tooltip);
-        textView = findViewById(R.id.textView);
+        tooltipTextView = findViewById(R.id.tooltipTextView);
         linearLayout = findViewById(R.id.linearlayout);
 
+        // 금주 / 금연 기간 별 효과 표시
+        textDays = findViewById(R.id.Days);
+        textView1 = findViewById(R.id.text1);
+        textView2 = findViewById(R.id.text2);
+        textView3 = findViewById(R.id.text3);
+        textView4 = findViewById(R.id.text4);
+        textView5 = findViewById(R.id.text5);
+        textView6 = findViewById(R.id.text6);
+        guideText1 = findViewById(R.id.guidetext1);
+        guideText2 = findViewById(R.id.guidetext2);
+        guideText3 = findViewById(R.id.guidetext3);
 
+        String dayStr = textDays.getText().toString();
+        dayStr = dayStr.replaceAll("[^0-9]","");
+        int dayCount = Integer.parseInt(dayStr);
+        System.out.println(dayCount);
+
+        if(dayCount > 0) {
+            textView1.setEnabled(true);
+            textView2.setEnabled(true);
+            textView3.setEnabled(true);
+        }
+        if(dayCount > 90) {
+            textView4.setEnabled(true);
+            guideText1.setVisibility(View.GONE);
+        }
+        if(dayCount > 180){
+            textView5.setEnabled(true);
+            guideText2.setVisibility(View.GONE);
+        }
+        if(dayCount > 365){
+            textView6.setEnabled(true);
+            guideText3.setVisibility(View.GONE);
+        }
+
+        // 원형 프로그래스바 설정
+        progressBar = findViewById(R.id.progressbar);
+        currentDays = findViewById(R.id.currentDay);
+        currentDays.setText("현재 "+dayCount+"일");
+        progressBar.setProgress(dayCount);
 
         // initialize tooltip manager
         toolTipsManager = new ToolTipsManager(this);
         tooltip.setOnClickListener(this);
-
-        textView.setOnClickListener(new View.OnClickListener() {
+        tooltipTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolTipsManager.dismissAll();
             }
         });
-
-
     }
-
     @Override
     public void onTipDismissed(View view, int anchorViewId, boolean byUser) {
         // Check condition
@@ -81,10 +118,9 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
                 int align = ToolTip.ALIGN_LEFT;
                 displayTooltip(position,align);
     }
-
     private void displayTooltip(int position, int align) {
         String message = "소주 한 병의 칼로리는 408kcal입니다.";
-        toolTipsManager.findAndDismiss(textView);
+        toolTipsManager.findAndDismiss(tooltipTextView);
         if(!message.isEmpty()) {
             ToolTip.Builder builder = new ToolTip.Builder(this, tooltip, linearLayout, message, position);
             builder.setAlign(align);

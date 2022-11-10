@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/host"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="match_parent"
@@ -106,7 +104,7 @@
                         android:layout_marginTop="315dp"
                         android:src="@drawable/smallsize_tab_icon1"/>
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/tooltipTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0000 칼로리를 참았습니다."
@@ -121,7 +119,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,13 +127,11 @@
                     android:text="Statistics"
                     android:textSize="48dp"
                     android:textStyle="bold" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_weight="2">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -144,53 +139,152 @@
                         android:text="000 님은"
                         android:layout_gravity="center"
                         android:textSize="56dp" />
-
                     <TextView
+                        android:id="@+id/Days"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
-                        android:text="00 일 동안 금주하셨네요!"
+                        android:text="77 일 동안 금주하셨네요"
                         android:layout_gravity="center"
                         android:textSize="32dp" />
-
                 </LinearLayout>
-
-                <LinearLayout
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="다음 목표까지 열심히 달려보세요!"
-                        android:textSize="24dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_gravity="center" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="현재 84일"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="24dp" />
-                    <com.google.android.material.progressindicator.CircularProgressIndicator
-                        android:id="@+id/progressbar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        app:indicatorSize="225dp"
-                        app:indicatorColor="@color/teal_200" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="목표 100일"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center" />
-                </LinearLayout>
-            </LinearLayout>
-        </FrameLayout>
+                    android:layout_weight="1"
+                    android:layout_marginBottom="60dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="그동안 금주를 통해 \n다음과 같은 효과를 얻었습니다."
+                            android:textSize="24dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✅ 더 나은 수면 습관"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:enabled="false"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="30dp"/>
 
+                        <TextView
+                            android:id="@+id/text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✅ 심혈관 질환 및 암 발병 위험율 감소"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:enabled="false"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="30dp"/>
+
+                        <TextView
+                            android:id="@+id/text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✅ 체중 감소 및 혈압 정상"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:enabled="false"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="30dp"/>
+
+                        <TextView
+                            android:id="@+id/text4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✅ 기억력 및 집중력 향상, 자존감 향상"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:enabled="false"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="30dp"/>
+                        <TextView
+                            android:id="@+id/guidetext1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚠️ 3개월 이상의 금주가 필요합니다."
+                            android:layout_gravity="end"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"/>
+
+                        <TextView
+                            android:id="@+id/text5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✅ 전체적 건강 향상 및 부상 또는 사고 위험 감소"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:enabled="false"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="30dp"/>
+                        <TextView
+                            android:id="@+id/guidetext2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚠️ 6개월 이상의 금주가 필요합니다."
+                            android:layout_gravity="end"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"/>
+
+                        <TextView
+                            android:id="@+id/text6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✅ 지방간 수치 15% 이상 감소, 일의 효율성 17% 증가"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:enabled="false"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="30dp"/>
+                        <TextView
+                            android:id="@+id/guidetext3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚠️ 1년 이상의 금주가 필요합니다."
+                            android:layout_gravity="end"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="다음 목표까지 열심히 달려보세요!"
+                            android:textSize="24dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/currentDay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="현재 00일"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="24dp" />
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progressbar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            app:indicatorSize="225dp"
+                            app:indicatorColor="@color/teal_200" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="목표 100일"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center" />
+                        </LinearLayout>
+                    </ScrollView>
+                </LinearLayout>
+            </FrameLayout>
 </TabHost>
