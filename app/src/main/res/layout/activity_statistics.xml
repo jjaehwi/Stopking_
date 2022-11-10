@@ -114,11 +114,16 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <ScrollView
                 android:id="@+id/tab_content2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginBottom="60dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -144,15 +149,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
-                        android:text="77 일 동안 금주하셨네요"
+                        android:text="91 일 동안 금주하셨네요"
                         android:layout_gravity="center"
                         android:textSize="32dp" />
                 </LinearLayout>
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="60dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -284,7 +284,7 @@
                             android:textStyle="bold"
                             android:layout_gravity="center" />
                         </LinearLayout>
-                    </ScrollView>
-                </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
             </FrameLayout>
 </TabHost>
