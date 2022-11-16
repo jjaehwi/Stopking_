@@ -72,7 +72,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:hint="이름 입력"
-        android:inputType="textPassword"/>
+        android:inputType="text"
+        android:privateImeOptions="defaultInputmode=korean"/>
 
     <TextView
         android:layout_width="match_parent"

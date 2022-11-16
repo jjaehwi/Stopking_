@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back_button_image"
+            app:tint="#2196F3"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            app:tint="#2196F3"
+            app:srcCompat="@drawable/settings" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Setting"
+            android:gravity="left|center"
+            android:textColor="#2196F3"
+            android:textSize="45dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:text="프로필"
+        android:textColor="@color/black"
+        android:textStyle="bold|italic"
+        android:textSize="40dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:backgroundTint="@color/black"
+        android:background="#4682B4" />
+
+    <LinearLayout
+        android:id="@+id/UserButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:onClick="UserClick"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/user"
+            app:tint="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="내 정보"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="32dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:backgroundTint="@color/black"
+        android:background="#4682B4" />
+
+    <LinearLayout
+        android:id="@+id/btn_changeMenu"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:onClick="ChangeMenu"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/change_circle"
+            app:tint="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="금주 / 금연 변경"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="32dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:backgroundTint="@color/black"
+        android:background="#4682B4" />
+
+    <LinearLayout
+        android:id="@+id/btn_initialize"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:onClick="initializeMenu"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/initialization"
+            app:tint="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="금연 / 금주 초기화"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="32dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:text="사용자"
+        android:textColor="@color/black"
+        android:textStyle="bold|italic"
+        android:textSize="40dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:backgroundTint="@color/black"
+        android:background="#4682B4" />
+
+    <LinearLayout
+        android:id="@+id/linear_logout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:onClick="user_logout"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logout"
+            app:tint="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="로그아웃"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="32dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:backgroundTint="@color/black"
+        android:background="#4682B4" />
+
+    <LinearLayout
+        android:id="@+id/linear_delete"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:onClick="user_delete"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/person_remove"
+            app:tint="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="회원 탈퇴"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="32dp"/>
+    </LinearLayout>
+
+</LinearLayout>

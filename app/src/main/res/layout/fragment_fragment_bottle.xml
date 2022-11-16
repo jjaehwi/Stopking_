@@ -1,0 +1,120 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentBottle">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/my_ranking_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="내 순위"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:textSize="16dp"
+                android:textFontWeight="2000"
+                ></TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="0dp"
+                android:background="@android:color/black"
+
+                ></View>
+
+            <LinearLayout
+                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:id="@+id/my_ranking_name"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_gravity="center"
+                    android:textSize="32dp"
+
+                    ></TextView>
+
+                <Space
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    ></Space>
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="120dp"
+                    android:orientation="horizontal"
+                    android:gravity="right|center_vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/my_ranking_bottle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        ></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" / "
+                        android:textSize="20dp"
+                        ></TextView>
+
+                    <TextView
+                        android:id="@+id/my_ranking_rank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="31위"
+                        android:textSize="20dp"
+                        ></TextView>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/my_ranking_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/user"
+                    android:background="@drawable/round_user_image"
+                    android:layout_marginLeft="8dp"
+                    ></ImageView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="0dp"
+                android:background="@android:color/black"
+                ></View>
+
+
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="프래그먼트 2" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

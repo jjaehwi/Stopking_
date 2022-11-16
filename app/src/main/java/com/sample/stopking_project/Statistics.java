@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -31,6 +32,7 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
     TextView textDays, currentDays, guideText1, guideText2, guideText3;
     RelativeLayout linearLayout;
     ProgressBar progressBar;
+    ImageView btnBack, btnBack2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,24 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         guideText1 = findViewById(R.id.guidetext1);
         guideText2 = findViewById(R.id.guidetext2);
         guideText3 = findViewById(R.id.guidetext3);
+        btnBack = findViewById(R.id.back_main);
+        btnBack2 = findViewById(R.id.back_main2);
+
+        // 뒤로 가기 버튼 눌렀을 때 (첫 번째 화면)
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        // 뒤로 가기 버튼 눌렀을 때 (두 번째 화면)
+        btnBack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         String dayStr = textDays.getText().toString();
         dayStr = dayStr.replaceAll("[^0-9]","");
