@@ -15,5 +15,13 @@
         <!-- 타이틀 바 없애기 -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <!-- 탭 테마 -->
+        <item name="android:textSize">24dp</item>
+        <item name="android:textColorPrimary">@android:color/holo_blue_bright</item>       <!-- 탭바 선택된 텍스트 색 -->
+        <item name="android:textColorSecondary">@android:color/white</item>     <!-- 탭바 텍스트 색 -->
+        <item name="tabIndicatorColor">@android:color/holo_blue_bright</item>      <!-- 탭바 선택시 색 -->
+        <item name="colorAccent">@android:color/holo_blue_bright</item>            <!-- 하단 움직이는 바 색-->
     </style>
+
 </resources>

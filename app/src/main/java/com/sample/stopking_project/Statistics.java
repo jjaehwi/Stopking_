@@ -41,11 +41,11 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
 
         TabHost tabHost = findViewById(R.id.host); tabHost.setup();
         TabHost.TabSpec spec = tabHost.newTabSpec("tab1");
-        spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(), R.drawable.tab_icon1, null));
+        spec.setIndicator("절 약");
         spec.setContent(R.id.tab_content1);
         tabHost.addTab(spec);
         spec = tabHost.newTabSpec("tab2");
-        spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(), R.drawable.tab_icon2, null));
+        spec.setIndicator("건 강");
         spec.setContent(R.id.tab_content2);
         tabHost.addTab(spec);
 
