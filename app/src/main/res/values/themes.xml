@@ -15,7 +15,8 @@
         <!-- 타이틀 바 없애기 -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
+    </style>
+    <style name="tabTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- 탭 테마 -->
         <item name="android:textSize">24dp</item>
         <item name="android:textColorPrimary">@android:color/holo_blue_bright</item>       <!-- 탭바 선택된 텍스트 색 -->

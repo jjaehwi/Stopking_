@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.graphics.Color;
+import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,11 +30,14 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
 
     ImageButton tooltip;
     ToolTipsManager toolTipsManager;
-    TextView tooltipTextView, textView1, textView2, textView3, textView4, textView5, textView6;
+    TextView tooltipTextView, saveMoneyText, goalMoneyText, progressRatio;
+    Button goalMoneyButton;
+    TextView textView1, textView2, textView3, textView4, textView5, textView6;
     TextView textDays, currentDays, guideText1, guideText2, guideText3;
     RelativeLayout linearLayout;
-    ProgressBar progressBar;
+    ProgressBar progressBar1, progressBar2;
     ImageView btnBack, btnBack2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,42 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         tooltip = findViewById(R.id.tooltip);
         tooltipTextView = findViewById(R.id.tooltipTextView);
         linearLayout = findViewById(R.id.linearlayout);
+
+        // 절약 금액 텍스트
+        saveMoneyText = findViewById(R.id.saveMoneyText);
+        // 목표 금액 텍스트
+        goalMoneyText = findViewById(R.id.goalMoneyText);
+        // 진행률 텍스트
+        progressRatio = findViewById(R.id.progressRatio);
+        // 목표 금액 재설정 버튼
+        goalMoneyButton = findViewById(R.id.goalMoneyButton);
+        // 버튼 눌러서 목표 금액 받아오기
+        goalMoneyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text = goalMoneyText.getText().toString();
+                alert_scaner alert = new alert_scaner(Statistics.this,text);
+                alert.callFunction();
+                alert.setModifyReturnListener(new alert_scaner.ModifyReturnListener() {
+                    @Override
+                    public void afterModify(String text) {
+                        goalMoneyText.setText(text);
+                    }
+                });
+            }
+        });
+        // 진행률 계산
+        String saveMoneyStr = saveMoneyText.getText().toString();
+        saveMoneyStr = saveMoneyStr.replaceAll("[^0-9]","");
+        int saveMoney = Integer.parseInt(saveMoneyStr);
+        String goalMoneyStr = goalMoneyText.getText().toString();
+        int goalMoney = Integer.parseInt(goalMoneyStr);
+        int progress =(int)(((double)saveMoney/goalMoney) * 100);
+
+        progressRatio.setText("진행률 : "+progress+"%");
+        // 프로그래스 바 1
+        progressBar1 = findViewById(R.id.progressbar1);
+        progressBar1.setProgress(progress);
 
         // 금주 / 금연 기간 별 효과 표시
         textDays = findViewById(R.id.Days);
@@ -107,10 +148,10 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         }
 
         // 원형 프로그래스바 설정
-        progressBar = findViewById(R.id.progressbar);
+        progressBar2 = findViewById(R.id.progressbar2);
         currentDays = findViewById(R.id.currentDay);
         currentDays.setText("현재 "+dayCount+"일");
-        progressBar.setProgress(dayCount);
+        progressBar2.setProgress(dayCount);
 
         // initialize tooltip manager
         toolTipsManager = new ToolTipsManager(this);

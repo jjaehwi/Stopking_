@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/host"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,8 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@android:color/darker_gray"
-            android:theme="@style/Theme.StopKing_project"/>
+            android:background="@android:color/holo_blue_bright" />
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
@@ -89,6 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 일 동안,"
+                            android:textStyle="bold"
                             android:textSize="56dp"
                             android:layout_marginLeft="20dp"/>
                         <TextView
@@ -137,6 +138,84 @@
                             android:layout_marginTop="380dp"
                             android:layout_marginLeft="20dp"/>
                     </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="50dp">
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="현재까지 모은 금액"
+                            android:textStyle="bold"
+                            android:textSize="42dp"
+                            android:layout_marginLeft="20dp"/>
+                        <TextView
+                            android:id="@+id/saveMoneyText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="총 75800원"
+                            android:textSize="35dp"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginLeft="20dp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginLeft="20dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="목표 금액 : "
+                                android:textSize="25dp" />
+                            <TextView
+                                android:id="@+id/goalMoneyText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="250000"
+                                android:textSize="25dp"
+                                tools:context=".Statistics"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="원"
+                                android:textSize="25dp" />
+                        </LinearLayout>
+                        <ProgressBar
+                            android:id="@+id/progressbar1"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:scaleY="3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:progressTint="@android:color/holo_blue_bright"
+                            android:progressBackgroundTint="@android:color/darker_gray"
+                            android:layout_margin="20dp"/>
+                        <TextView
+                            android:id="@+id/progressRatio"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="진행률 : 00%"
+                            android:textSize="15dp"
+                            android:layout_marginLeft="20dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="티끌 모아 태산! \n목표까지 달려봐요!"
+                            android:textSize="25dp"
+                            android:textStyle="italic"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginLeft="20dp"/>
+                        <Button
+                            android:id="@+id/goalMoneyButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="목표 금액 재설정하기"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"/>
+                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
 
@@ -312,7 +391,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="24dp" />
                         <com.google.android.material.progressindicator.CircularProgressIndicator
-                            android:id="@+id/progressbar"
+                            android:id="@+id/progressbar2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
