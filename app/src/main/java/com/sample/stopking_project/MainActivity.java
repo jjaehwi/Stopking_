@@ -3,23 +3,32 @@ package com.sample.stopking_project;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.AggregateQuery;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -30,27 +39,30 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference dbReference;
     private int user_stop_days; // 금주 일수
     private int user_stop_bottles; // 몇 병 참았는지
+    private long documentCount;
     private Button settings;
     private String getName;
     private String getEmail;
+    private String getGoal;
+    private String getRank;
+    public int my_rank = 1;
 
-    //test
-    private Button btn_test;
 
-    public static Date convertStringtoDate(String Date){ // 데이터베이스에서 가져온 날짜 변환
+    public static Date convertStringtoDate(String Date) { // 데이터베이스에서 가져온 날짜 변환
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         Date date = null;
-        try{
+        try {
             date = format.parse(Date);
-        } catch(ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return date;
     }
 
-    public static String caculateBank(int average_drink,int week_drink,int days){ // 절약 금액 계산
+    public static String caculateBank(int average_drink, int week_drink, int days) { // 절약 금액 계산
         int drink_price = 4500;
         int week = days / 7;
         int result = week * average_drink * week_drink * drink_price;
@@ -70,22 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
         // 현재 로그인한 사용자 가져오기.
         FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (fbUser != null)
-        {
+        if (fbUser != null) {
             //로그인 한 사용자가 존재할 경우.
             getEmail = fbUser.getEmail();
         }
-
-        btn_test = findViewById(R.id.button_test);
-
-        btn_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "버튼 눌렀노.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, DrinkFirebaseTest.class);
-                startActivity(intent);
-            }
-        });
 
         // 금주 날짜 가져오기
         DocumentReference docRef = db.collection("users").document(getEmail);
@@ -127,12 +127,92 @@ public class MainActivity extends AppCompatActivity {
 
                 String week_drink_str = documentSnapshot.getString("week_drink");
                 int week_drink_int = Integer.parseInt(week_drink_str);
-                String bank_info_text = caculateBank(average_drink_int,week_drink_int,user_stop_days);
-                user_stop_bottles = user_stop_days/7 * average_drink_int * week_drink_int;
+                String bank_info_text = caculateBank(average_drink_int, week_drink_int, user_stop_days);
+                user_stop_bottles = user_stop_days / 7 * average_drink_int * week_drink_int;
                 bank_info.setText(bank_info_text + "원");
             }
         });
 
+        TextView health_info_text = findViewById(R.id.health_info);
+        // 건강 정보 노출
+        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (user_stop_days > 0) {
+                    health_info_text.setText("1단계");
+                }
+                if (user_stop_days > 90) {
+                    health_info_text.setText("2단계");
+                }
+                if (user_stop_days > 180) {
+                    health_info_text.setText("3단계");
+                }
+                if (user_stop_days > 365) {
+                    health_info_text.setText("4단계");
+                }
+            }
+        });
+
+
+        // TODO : 상위 퍼센트 노출
+
+        dbReference = db.collection("users");
+
+
+        // 나의 랭킹 찾기, 데이터를 모두 가져옴
+        TextView main_rank_position = findViewById(R.id.main_rank_position);
+
+        dbReference.orderBy("stop_drink")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            my_rank = 1;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.getString("email").compareTo(getEmail) == 0) {
+                                    getRank = String.valueOf(my_rank);
+                                    Log.d("ranktest",String.valueOf(getRank));
+                                    break;
+                                }
+                                my_rank++;
+                            }
+                        } else {
+                            Log.d("RANKING ACTIVITY", "에러문 출력: ", task.getException()); // 에러문 출력
+                        }
+                    }
+                });
+
+        AggregateQuery countQuery = db.collection("users").count();
+        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                AggregateQuerySnapshot snapshot = task.getResult();
+                documentCount = snapshot.getCount();
+                Log.d("ranktest",String.valueOf(documentCount));
+                main_rank_position.setText("상위 " + String.valueOf((int)(((double)my_rank/(double)documentCount)*100)) + "%");
+            } else {
+                Log.d("superdroid", "Count failed: ", task.getException());
+            }
+        });
+
+
+        TextView bank_goal = findViewById(R.id.bank_goal);
+        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                getGoal = documentSnapshot.getString("drink_bank");
+                double getGoal_double = Double.parseDouble(getGoal);
+                String average_drink_str = documentSnapshot.getString("average_drink");
+                double average_drink_double = Double.parseDouble(average_drink_str);
+                String week_drink_str = documentSnapshot.getString("week_drink");
+                double week_drink_double = Double.parseDouble(week_drink_str);
+                double result = Math.round(getGoal_double / (average_drink_double * week_drink_double * 4500)) * 7;
+                int result_int = (int) result - user_stop_days;
+
+                String goal_text = String.valueOf(result_int);
+                bank_goal.setText("D-" + goal_text);
+            }
+        });
 
 
         Button btn_ranking = findViewById(R.id.btn_ranking);
@@ -142,15 +222,14 @@ public class MainActivity extends AppCompatActivity {
                 // 랭킹 화면으로 이동
                 Intent intent = new Intent(MainActivity.this, RankingActivity.class);
                 intent.putExtra("email", getEmail); // email값 전달
-                intent.putExtra("name",getName); // username 전달
-                String user_stop_days_str =String.valueOf(user_stop_days);
+                intent.putExtra("name", getName); // username 전달
+                String user_stop_days_str = String.valueOf(user_stop_days);
                 String user_stop_bottles_str = String.valueOf(user_stop_bottles);
-                intent.putExtra("day",user_stop_days_str); // 금주 일수 전달
-                intent.putExtra("bottle",user_stop_bottles_str); // 참은 병 전달
+                intent.putExtra("day", user_stop_days_str); // 금주 일수 전달
+                intent.putExtra("bottle", user_stop_bottles_str); // 참은 병 전달
                 startActivity(intent);
             }
         });
-
 
 
         Button btn_register = findViewById(R.id.btn_statistics);
@@ -174,5 +253,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
+
+
 }

@@ -9,12 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DrinkRankingAdapter extends RecyclerView.Adapter<DrinkRankingAdapter.RankingViewHolder> {
 
-    private ArrayList<DrinkFirebaseData> arrayList;
+    private static ArrayList<DrinkFirebaseData> arrayList;
     private Context context;
+    private int rank = 4;
 
     public DrinkRankingAdapter(ArrayList<DrinkFirebaseData> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -33,10 +37,10 @@ public class DrinkRankingAdapter extends RecyclerView.Adapter<DrinkRankingAdapte
     @Override
     public void onBindViewHolder(@NonNull RankingViewHolder holder, int position) {
         //그림 필요 시 필요.
-        holder.tv_Name.setText(arrayList.get(position).getName());
-        holder.tv_avg_drink.setText(arrayList.get(position).getAverage_drink());
-        holder.email.setText(arrayList.get(position).getEmail());
-        holder.stop_drink.setText(arrayList.get(position).getStop_drink());
+        holder.user_name.setText(arrayList.get(position).getName());
+        holder.user_days.setText(arrayList.get(position).setStop_drink()+"일");
+        holder.user_rank.setText(rank +"위");
+        rank+=1;
     }
 
     @Override
@@ -48,17 +52,15 @@ public class DrinkRankingAdapter extends RecyclerView.Adapter<DrinkRankingAdapte
 
     //list.data에 data들을 여기로 가져온다.
     public class RankingViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_Name;
-        TextView tv_avg_drink;
-        TextView email;
-        TextView stop_drink;
+        TextView user_name;
+        TextView user_days;
+        TextView user_rank;
 
         public RankingViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tv_Name = itemView.findViewById(R.id.tv_name);
-            this.tv_avg_drink = itemView.findViewById(R.id.tv_agvDrink);
-            this.email = itemView.findViewById(R.id.tv_email);
-            this.stop_drink = itemView.findViewById(R.id.tv_stop_drink);
+            this.user_name = itemView.findViewById(R.id.ranking_user_name);
+            this.user_days = itemView.findViewById(R.id.ranking_user_days);
+            this.user_rank = itemView.findViewById(R.id.ranking_rank);
         }
     }
 }

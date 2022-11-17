@@ -175,7 +175,7 @@
     <!--메인 주요 정보 리스트-->
 
 
-    <!--D-Day 및 상위 퍼센트 표시, 랭킹 구현 시 후에 다시 구현-->
+    <!--상위 퍼센트 표시, 랭킹 구현 시 후에 다시 구현-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -205,9 +205,9 @@
                 android:textSize="22dp"></TextView>
 
             <TextView
+                android:id="@+id/main_rank_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="상위 14%"
                 android:textColor="#0099FF"
                 android:textSize="36dp"></TextView>
 
@@ -231,10 +231,10 @@
                 android:textSize="18dp"></TextView>
 
             <TextView
+                android:id="@+id/bank_goal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:text="D-193"
                 android:textColor="#59BBFC"
                 android:textSize="32dp"></TextView>
 
@@ -242,7 +242,7 @@
 
     </LinearLayout>
 
-    <!--D-Day 및 상위 퍼센트 표시, 랭킹 구현 시 후에 다시 구현-->
+    <!--상위 퍼센트 표시, 랭킹 구현 시 후에 다시 구현-->
 
     <!--메뉴-->
     <LinearLayout
@@ -334,6 +334,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="65dp"
+                android:gravity="center"
                 android:layout_marginTop="35dp"
                 android:background="@drawable/round_menu_help"
                 android:backgroundTint="#3498DB"
@@ -382,14 +383,6 @@
 
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/button_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="버튼" />
 </LinearLayout>
 
 

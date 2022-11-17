@@ -12,13 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StopKing_project"
         tools:targetApi="31">
-        <activity
-            android:name=".DrinkFirebaseTest"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".MyInfoActivity"
             android:exported="false">

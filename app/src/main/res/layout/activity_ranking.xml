@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".RankingActivity">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+
+
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -35,6 +47,7 @@
         android:text="@string/Ranking_title"
         android:gravity="center"
         android:textSize="40dp"
+        android:textColor="#0F9FFF"
         ></TextView>
 
     <View
@@ -91,7 +104,8 @@
 
     </LinearLayout>
 
+    </RelativeLayout>
 
-
+    </ScrollView>
 
 </RelativeLayout>
