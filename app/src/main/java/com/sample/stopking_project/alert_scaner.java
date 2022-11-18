@@ -7,14 +7,20 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class alert_scaner {
 
     private Context context;
     private String text;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String getEmail;
 
-    public alert_scaner(Statistics context, String text) {
+    public alert_scaner(Statistics context, String text, String getEmail) {
         this.context = context;
         this.text = text;
+        this.getEmail = getEmail;
     }
 
     private ModifyReturnListener modifyReturnListener;
@@ -48,9 +54,12 @@ public class alert_scaner {
         conformBtn.setOnClickListener(new View.OnClickListener() { // 수정 버튼 눌렀을 때
             @Override
             public void onClick(View view) {
+                DocumentReference docRef = db.collection("users").document(getEmail);
                 String ModifyedText = scaneET.getText().toString(); //스케너에 있는 텍스트 String으로 가져오기
                 modifyReturnListener.afterModify(ModifyedText);
                 dlg.onBackPressed();
+                // db 지정 필드에 값 업데이트하기!
+                docRef.update("drink_bank",scaneET.getText().toString());
             }
         });
 

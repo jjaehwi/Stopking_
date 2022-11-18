@@ -57,6 +57,7 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
     private String getEmail;
     private String getSaveMoney;
     private String str_drinkBank;
+    private String goalText;
 
 
 
@@ -104,14 +105,12 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
                     goalMoneyText.setTypeface(null, Typeface.BOLD);
                     saveMoneyText.setText("총 " + getSaveMoney + "원");
 
-
-
                 // 버튼 눌러서 목표 금액 받아오기
                 goalMoneyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String text = goalMoneyText.getText().toString();
-                        alert_scaner alert = new alert_scaner(Statistics.this,text);
+                        goalText = goalMoneyText.getText().toString();
+                        alert_scaner alert = new alert_scaner(Statistics.this,goalText, getEmail);
                         alert.callFunction();
                         alert.setModifyReturnListener(new alert_scaner.ModifyReturnListener() {
                             @Override
@@ -121,6 +120,8 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
                         });
                     }
                 });
+
+                docRef.update("drink_bank",goalMoneyText.getText().toString());
                 // 진행률 계산
                 getSaveMoney = getSaveMoney.replaceAll("[^0-9]","");
                 int saveMoney = Integer.parseInt(getSaveMoney);
