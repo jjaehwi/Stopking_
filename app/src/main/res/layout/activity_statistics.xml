@@ -201,6 +201,7 @@
                             android:textSize="15dp"
                             android:layout_marginLeft="20dp"/>
                         <TextView
+                            android:id="@+id/cheerText"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="티끌 모아 태산! \n목표까지 달려봐요!"

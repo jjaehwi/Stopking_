@@ -47,7 +47,7 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     ImageButton tooltip;
     ToolTipsManager toolTipsManager;
-    TextView tooltipTextView, saveMoneyText, goalMoneyText, progressRatio;
+    TextView tooltipTextView, saveMoneyText, goalMoneyText, progressRatio, cheerText;
     Button goalMoneyButton;
     TextView textView1, textView2, textView3, textView4, textView5, textView6;
     TextView textDays, currentDays, guideText1, guideText2, guideText3;
@@ -91,6 +91,8 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         goalMoneyText = findViewById(R.id.goalMoneyText);
         // 진행률 텍스트
         progressRatio = findViewById(R.id.progressRatio);
+        // 응원 문구 텍스트
+        cheerText = findViewById(R.id.cheerText);
         // 목표 금액 재설정 버튼
         goalMoneyButton = findViewById(R.id.goalMoneyButton);
 
@@ -133,6 +135,12 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
                 // 프로그래스 바 1
                 progressBar1 = findViewById(R.id.progressbar1);
                 progressBar1.setProgress(progress);
+
+                if(progress >= 100)
+                    cheerText.setText("축하합니다! \n목표금액을 달성하셨습니다!");
+                else
+                    cheerText.setText("티끌 모아 태산! \n목표까지 달려봐요!");
+
             }
         });
 
