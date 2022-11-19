@@ -4,97 +4,422 @@
     android:layout_height="match_parent"
     tools:context=".FragmentBottle">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/drink_bottle_my_ranking_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:text="내 순위"
+            android:textColor="@color/black"
+            android:textFontWeight="2000"
+            android:textSize="16dp"></TextView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="0dp"
+            android:background="@android:color/black"
+
+            ></View>
 
         <LinearLayout
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            >
+            android:layout_height="60dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/my_ranking_title"
-                android:layout_width="match_parent"
+                android:id="@+id/drink_bottle_my_ranking_name"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:text="내 순위"
-                android:layout_marginTop="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="3dp"
-                android:textSize="16dp"
-                android:textFontWeight="2000"
-                ></TextView>
+                android:layout_gravity="center"
+                android:layout_marginLeft="14dp"
+                android:textColor="@color/black"
+                android:textSize="32dp"></TextView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="0dp"
-                android:background="@android:color/black"
-
-                ></View>
+            <Space
+                android:layout_width="130dp"
+                android:layout_height="match_parent"></Space>
 
             <LinearLayout
-                android:layout_height="60dp"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="right|center_vertical"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
                 >
-                <TextView
-                    android:id="@+id/my_ranking_name"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="14dp"
-                    android:layout_gravity="center"
-                    android:textSize="32dp"
-
-                    ></TextView>
-
-                <Space
-                    android:layout_width="130dp"
-                    android:layout_height="match_parent"
-                    ></Space>
 
                 <LinearLayout
-                    android:layout_height="match_parent"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="right|center_vertical"
                     >
 
                     <TextView
-                        android:id="@+id/my_ranking_bottle"
+                        android:id="@+id/drink_my_ranking_bottle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
-                        ></TextView>
+                        android:textColor="@color/black"
+                        android:textSize="20dp"></TextView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" / "
-                        android:textSize="20dp"
-                        ></TextView>
+                        android:textColor="@color/black"
+                        android:textSize="20dp"></TextView>
 
                     <TextView
-                        android:id="@+id/my_ranking_rank"
+                        android:id="@+id/drink_bottle_my_ranking_rank"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="31위"
-                        android:textSize="20dp"
+                        android:layout_gravity="right"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"></TextView>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/drink_bottle_my_ranking_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:textColor="#284ADE"
+                    android:textStyle="italic"
+                    android:textSize="12dp"></TextView>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/drink_bottle_my_ranking_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/round_user_image"
+                android:src="@drawable/user"></ImageView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="0dp"
+            android:background="@android:color/black"></View>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="bottom"
+            android:text="전체 순위"
+            android:textSize="12dp"></TextView>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="0dp"
+            android:background="@android:color/black"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/trophy_gold"></ImageView>
+
+                <TextView
+                    android:id="@+id/drink_bottle_first_ranking_name"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14dp"
+                    android:text="황동현"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"></TextView>
+
+                <Space
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"></Space>
+
+
+                <RelativeLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="14dp"
+                    >
+
+                <LinearLayout
+                    android:id="@+id/drink_bottle_first_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/drink_first_ranking_bottle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123병"
+                        android:textColor="@color/black"
+                        android:textSize="24dp"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" / "
+                        android:textColor="@color/black"
+                        android:textSize="24dp"></TextView>
+
+                    <TextView
+                        android:id="@+id/drink_bottle_first_ranking_rank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1위"
+                        android:textColor="@color/black"
+                        android:textSize="24dp"></TextView>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/star_gold"></ImageView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignRight="@+id/drink_bottle_first_info"
+                    android:layout_below="@+id/drink_bottle_first_info"
+                    >
+                    <TextView
+                        android:id="@+id/drink_first_average_drink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="몇병"
+                        android:textColor="#284ADE"
+                        android:textStyle="italic"
+                        android:textSize="12dp"
                         ></TextView>
 
                 </LinearLayout>
 
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="0dp"
+                android:background="@android:color/black"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+
                 <ImageView
-                    android:id="@+id/my_ranking_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/user"
-                    android:background="@drawable/round_user_image"
-                    android:layout_marginLeft="8dp"
-                    ></ImageView>
+                    android:src="@drawable/trophy_silver"></ImageView>
+
+                <TextView
+                    android:id="@+id/drink_bottle_second_ranking_name"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14dp"
+                    android:text="황동현"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"></TextView>
+
+                <Space
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"></Space>
+
+                <RelativeLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="14dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/drink_bottle_second_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/drink_second_ranking_bottle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="123병"
+                            android:textColor="@color/black"
+                            android:textSize="24dp"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" / "
+                            android:textColor="@color/black"
+                            android:textSize="24dp"></TextView>
+
+                        <TextView
+                            android:id="@+id/drink_bottle_second_ranking_rank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2위"
+                            android:textColor="@color/black"
+                            android:textSize="24dp"></TextView>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/star_silver"></ImageView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignRight="@+id/drink_bottle_second_info"
+                        android:layout_below="@+id/drink_bottle_second_info"
+                        >
+                        <TextView
+                            android:id="@+id/drink_second_average_drink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="몇병"
+                            android:textColor="#284ADE"
+                            android:textStyle="italic"
+                            android:textSize="12dp"
+                            ></TextView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="0dp"
+                android:background="@android:color/black"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/trophy_bronze"></ImageView>
+
+                <TextView
+                    android:id="@+id/drink_bottle_third_ranking_name"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14dp"
+                    android:text="황동현"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"></TextView>
+
+                <Space
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"></Space>
+
+                <RelativeLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="14dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/drink_bottle_third_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/drink_third_ranking_bottle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="123병"
+                            android:textColor="@color/black"
+                            android:textSize="24dp"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" / "
+                            android:textColor="@color/black"
+                            android:textSize="24dp"></TextView>
+
+                        <TextView
+                            android:id="@+id/drink_bottle_third_ranking_rank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3위"
+                            android:textColor="@color/black"
+                            android:textSize="24dp"></TextView>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/star_bronze"></ImageView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignRight="@+id/drink_bottle_third_info"
+                        android:layout_below="@+id/drink_bottle_third_info"
+                        >
+                        <TextView
+                            android:id="@+id/drink_third_average_drink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="몇병"
+                            android:textColor="#284ADE"
+                            android:textStyle="italic"
+                            android:textSize="12dp"
+                            ></TextView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -102,19 +427,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_margin="0dp"
-                android:background="@android:color/black"
-                ></View>
+                android:background="@android:color/black"></View>
 
-
-
-            <TextView
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="프래그먼트 2" />
 
         </LinearLayout>
 
-    </ScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/drink_bottle_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_light"
+            android:overScrollMode="never"></androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
 
 </FrameLayout>

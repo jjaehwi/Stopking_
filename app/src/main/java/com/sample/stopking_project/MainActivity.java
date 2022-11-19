@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -29,6 +30,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -163,6 +166,18 @@ public class MainActivity extends AppCompatActivity {
         // 나의 랭킹 찾기, 데이터를 모두 가져옴
         TextView main_rank_position = findViewById(R.id.main_rank_position);
 
+        AggregateQuery countQuery = db.collection("users").count();
+        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                AggregateQuerySnapshot snapshot = task.getResult();
+                documentCount = snapshot.getCount();
+                Log.d("ranktest",String.valueOf(documentCount));
+                main_rank_position.setText("상위 " + String.valueOf((int)(((double)my_rank/(double)documentCount)*100)) + "%");
+            } else {
+                Log.d("superdroid", "Count failed: ", task.getException());
+            }
+        });
+
         dbReference.orderBy("stop_drink")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -184,20 +199,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        AggregateQuery countQuery = db.collection("users").count();
-        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                AggregateQuerySnapshot snapshot = task.getResult();
-                documentCount = snapshot.getCount();
-                Log.d("ranktest",String.valueOf(documentCount));
-                main_rank_position.setText("상위 " + String.valueOf((int)(((double)my_rank/(double)documentCount)*100)) + "%");
-            } else {
-                Log.d("superdroid", "Count failed: ", task.getException());
-            }
-        });
 
 
         TextView bank_goal = findViewById(R.id.bank_goal);
+        TextView bank_goal_title = findViewById(R.id.bank_goal_title);
+        Button btn_bank_goal_reset = findViewById(R.id.btn_bank_goal_reset);
         docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
@@ -209,8 +215,15 @@ public class MainActivity extends AppCompatActivity {
                 double week_drink_double = Double.parseDouble(week_drink_str);
                 double result = Math.round(getGoal_double / (average_drink_double * week_drink_double * 4500)) * 7;
                 int result_int = (int) result - user_stop_days;
-                String goal_text = String.valueOf(result_int);
-                bank_goal.setText("D-" + goal_text);
+                if(result_int>0) {
+                    String goal_text = String.valueOf(result_int);
+                    bank_goal.setText(goal_text + "일");
+                } else {
+                    bank_goal_title.setText("목표 달성!");
+                    bank_goal.setVisibility(View.GONE);
+                    btn_bank_goal_reset.setVisibility(View.VISIBLE);
+                }
+
             }
         });
 
@@ -227,6 +240,17 @@ public class MainActivity extends AppCompatActivity {
                 String user_stop_bottles_str = String.valueOf(user_stop_bottles);
                 intent.putExtra("day", user_stop_days_str); // 금주 일수 전달
                 intent.putExtra("bottle", user_stop_bottles_str); // 참은 병 전달
+                startActivity(intent);
+            }
+        });
+
+        btn_bank_goal_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 통계 화면으로 이동
+                Intent intent = new Intent(MainActivity.this, Statistics.class);
+                intent.putExtra("email", getEmail); // email값 전달
+                intent.putExtra("saveMoney", bank_info_text);
                 startActivity(intent);
             }
         });

@@ -53,7 +53,7 @@
                 android:gravity="center"
                 android:text="금주"
                 android:textSize="18dp"
-
+                android:textColor="@color/black"
                 ></TextView>
 
             <ImageView
@@ -69,7 +69,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:textSize="16dp"></TextView>
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                ></TextView>
 
 
         </LinearLayout>
@@ -104,6 +106,7 @@
                 android:layout_marginBottom="12dp"
                 android:gravity="center"
                 android:text="절약"
+                android:textColor="@color/black"
                 android:textSize="18dp"></TextView>
 
             <ImageView
@@ -118,7 +121,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="9dp"
                 android:gravity="center"
-                android:textSize="15dp"></TextView>
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                ></TextView>
 
 
         </LinearLayout>
@@ -152,6 +157,7 @@
                 android:layout_marginBottom="12dp"
                 android:gravity="center"
                 android:text="건강"
+                android:textColor="@color/black"
                 android:textSize="18dp"></TextView>
 
             <ImageView
@@ -167,6 +173,7 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="3단계"
+                android:textColor="@color/black"
                 android:textSize="16dp"></TextView>
 
         </LinearLayout>
@@ -199,15 +206,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:text="금주 일수"
+                android:textColor="@color/black"
                 android:textSize="22dp"></TextView>
 
             <TextView
                 android:id="@+id/main_rank_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:textColor="#0099FF"
                 android:textSize="36dp"></TextView>
 
@@ -220,29 +230,43 @@
             android:layout_marginTop="130dp"
             android:layout_weight="1"
             android:orientation="vertical"
-
+            android:gravity="center"
             >
 
             <TextView
+                android:id="@+id/bank_goal_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:text="목표 금액까지"
+                android:textColor="@color/black"
                 android:textSize="18dp"></TextView>
 
             <TextView
                 android:id="@+id/bank_goal"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
                 android:textColor="#59BBFC"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:text="D-13"
                 android:textSize="32dp"></TextView>
+
+            <Button
+                android:id="@+id/btn_bank_goal_reset"
+                android:background="@drawable/main_btn_goal_reset"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:textColor="#0099FF"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:text="재설정하러 가기"
+                ></Button>
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <!--상위 퍼센트 표시, 랭킹 구현 시 후에 다시 구현-->
 
     <!--메뉴-->
     <LinearLayout
@@ -250,25 +274,22 @@
         android:layout_height="0dp"
         android:layout_gravity="bottom"
         android:layout_weight="3"
+        android:weightSum="4"
         android:background="@drawable/main_background"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"
+            android:weightSum="4"
+            ></LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             >
 
@@ -276,8 +297,9 @@
                 android:id="@+id/btn_ranking"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="85dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:gravity="center_vertical"
                 android:background="@drawable/round_menu_ranking"
                 android:backgroundTint="#E74C3C"
                 android:drawableStart="@drawable/groups">
@@ -288,24 +310,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
                 android:text="랭킹"
+                android:textColor="@color/black"
                 android:textSize="18dp"></TextView>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
 
             <Button
                 android:id="@+id/btn_statistics"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
                 android:background="@drawable/round_menu_analytics"
                 android:backgroundTint="#FFDD00"
                 android:drawableStart="@drawable/analytics">
@@ -316,29 +343,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
                 android:text="통계"
+                android:textColor="@color/black"
                 android:textSize="18dp"></TextView>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
 
             <Button
                 android:id="@+id/help_btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="65dp"
-                android:gravity="center"
-                android:layout_marginTop="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
                 android:background="@drawable/round_menu_help"
                 android:backgroundTint="#3498DB"
-                android:drawableStart="@drawable/bulb">
+                android:drawableStart="@drawable/bulb"
+                >
 
             </Button>
 
@@ -346,24 +379,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="31dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:gravity="center_vertical"
                 android:text="도움"
+                android:textColor="@color/black"
                 android:textSize="18dp"></TextView>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_settings"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="85dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:gravity="center_vertical"
                 android:background="@drawable/round_menu_setting"
                 android:backgroundTint="#9B59B6"
                 android:drawableStart="@drawable/settings">
@@ -374,9 +413,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:gravity="center_vertical"
                 android:text="설정"
+                android:textColor="@color/black"
                 android:textSize="18dp"></TextView>
 
         </LinearLayout>

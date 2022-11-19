@@ -1,13 +1,10 @@
 package com.sample.stopking_project;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,12 +20,9 @@ import com.google.firebase.firestore.AggregateQuery;
 import com.google.firebase.firestore.AggregateQuerySnapshot;
 import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,7 +37,7 @@ public  class FragmentDay extends Fragment {
     private String getDay;
     private String getRank;
     private RecyclerView recyclerView;
-    private DrinkRankingAdapter adapter;
+    private DrinkDayRankingAdapter adapter;
     private long documentCount;
     public int my_rank = 1;
     private int count = 0;
@@ -59,7 +53,7 @@ public  class FragmentDay extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference dbReference;
-    private ArrayList<DrinkFirebaseData> list = new ArrayList<>();
+    private ArrayList<DrinkDayFirebaseData> list = new ArrayList<>();
 
     public Date convertStringtoDate(String Date) { // 데이터베이스에서 가져온 날짜 변환
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -89,9 +83,9 @@ public  class FragmentDay extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_fragment_day, container, false);
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        TextView my_ranking_rank = v.findViewById(R.id.my_ranking_rank);
-        TextView my_ranking_position = v.findViewById(R.id.my_ranking_position);
+        recyclerView = (RecyclerView) v.findViewById(R.id.drink_day_recyclerView);
+        TextView my_ranking_rank = v.findViewById(R.id.drink_my_day_ranking_rank);
+        TextView my_ranking_position = v.findViewById(R.id.drink_my_day_ranking_position);
 
 
         recyclerView.setHasFixedSize(true);
@@ -138,12 +132,12 @@ public  class FragmentDay extends Fragment {
             }
         });
 
-        TextView first_rank_name = v.findViewById(R.id.first_ranking_name);
-        TextView first_rank_day = v.findViewById(R.id.first_ranking_day);
-        TextView second_rank_name = v.findViewById(R.id.second_ranking_name);
-        TextView second_rank_day = v.findViewById(R.id.second_ranking_day);
-        TextView third_rank_name = v.findViewById(R.id.third_ranking_name);
-        TextView third_rank_day = v.findViewById(R.id.third_ranking_day);
+        TextView first_rank_name = v.findViewById(R.id.drink_day_first_ranking_name);
+        TextView first_rank_day = v.findViewById(R.id.drink_first_ranking_day);
+        TextView second_rank_name = v.findViewById(R.id.drink_day_second_ranking_name);
+        TextView second_rank_day = v.findViewById(R.id.drink_second_ranking_day);
+        TextView third_rank_name = v.findViewById(R.id.drink_third_ranking_name);
+        TextView third_rank_day = v.findViewById(R.id.drink_third_ranking_day);
 
         // 1,2,3등 데이터 설정
         dbReference.orderBy("stop_drink")
@@ -206,7 +200,7 @@ public  class FragmentDay extends Fragment {
 //                                        Log.d("compare", "True");
 //                                    }
 //                                    my_rank++;
-                                    DrinkFirebaseData fbdata = document.toObject(DrinkFirebaseData.class); //fbData 객체에 데이터를 담는다.
+                                    DrinkDayFirebaseData fbdata = document.toObject(DrinkDayFirebaseData.class); //fbData 객체에 데이터를 담는다.
                                     list.add(fbdata); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비를 한다.
                                 }
                                 count++;
@@ -217,7 +211,7 @@ public  class FragmentDay extends Fragment {
                         }
                     }
                 });
-        adapter = new DrinkRankingAdapter(list, getActivity());
+        adapter = new DrinkDayRankingAdapter(list, getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
@@ -228,8 +222,8 @@ public  class FragmentDay extends Fragment {
             getDay = extra.getString("day");
         }
 
-        TextView my_ranking_name = v.findViewById(R.id.my_ranking_name);
-        TextView my_ranking_day = v.findViewById(R.id.my_ranking_day);
+        TextView my_ranking_name = v.findViewById(R.id.drink_my_day_ranking_name);
+        TextView my_ranking_day = v.findViewById(R.id.drink_my_ranking_day);
         my_ranking_name.setText(getName);
         my_ranking_day.setText(getDay + "일");
 
