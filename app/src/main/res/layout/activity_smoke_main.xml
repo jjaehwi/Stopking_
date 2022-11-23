@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".Drink_MainActivity">
+
+
+    <!--메인 타이틀-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:text="@string/underline"
+        android:textColor="#2196F3"
+        android:textSize="50dp"
+        android:textStyle="italic|bold" />
+    <!--메인 타이틀-->
+
+
+    <!--
+    메인 주요 정보 리스트 : 건강 정보 미포함
+
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="45dp"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="8">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="금연"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                ></TextView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="center"
+                android:src="@drawable/hourglass_bottom"></ImageView>
+
+            <TextView
+                android:id="@+id/day_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></Space>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"></View>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></Space>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="절약"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/attach_money"></ImageView>
+
+            <TextView
+                android:id="@+id/bank_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="9dp"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                ></TextView>
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></Space>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"></View>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></Space>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="건강"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/favorite"></ImageView>
+
+            <TextView
+                android:id="@+id/health_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="3단계"
+                android:textColor="@color/black"
+                android:textSize="16dp"></TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--메인 주요 정보 리스트-->
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="4"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="금연 일수"
+                android:textColor="@color/black"
+                android:textSize="22dp"></TextView>
+
+            <TextView
+                android:id="@+id/main_rank_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textColor="#0099FF"
+                android:textSize="36dp"></TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/bank_goal_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="목표 금액까지"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:id="@+id/bank_goal"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:textColor="#59BBFC"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:text="D-13"
+                android:textSize="32dp"></TextView>
+
+            <Button
+                android:id="@+id/btn_bank_goal_reset"
+                android:background="@drawable/main_btn_goal_reset"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:textColor="#0099FF"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:text="재설정하러 가기"
+                ></Button>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--메뉴-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="3"
+        android:weightSum="4"
+        android:background="@drawable/main_background"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="4"
+            ></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <Button
+                android:id="@+id/btn_ranking"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/round_menu_ranking"
+                android:backgroundTint="#E74C3C"
+                android:drawableStart="@drawable/groups">
+
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:text="랭킹"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <Button
+                android:id="@+id/btn_statistics"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/round_menu_analytics"
+                android:backgroundTint="#FFDD00"
+                android:drawableStart="@drawable/analytics">
+
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="통계"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <Button
+                android:id="@+id/help_btn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/round_menu_help"
+                android:backgroundTint="#3498DB"
+                android:drawableStart="@drawable/bulb"
+                >
+
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:gravity="center_vertical"
+                android:text="도움"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_settings"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/round_menu_setting"
+                android:backgroundTint="#9B59B6"
+                android:drawableStart="@drawable/settings">
+
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:gravity="center_vertical"
+                android:text="설정"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

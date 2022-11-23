@@ -138,6 +138,7 @@ public class RegisterSmoke extends AppCompatActivity {
                     user.put("start_smoke", startSmoke);
                     user.put("smoke_bank", smokeBank);
                     user.put("stop_smoke", date);
+                    user.put("flag","smoke");
 
                     //문서 추가
                     db.collection("users").document(email).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
