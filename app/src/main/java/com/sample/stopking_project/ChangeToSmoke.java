@@ -27,7 +27,7 @@ public class ChangeToSmoke extends AppCompatActivity {
     private Button mbtnComplete;                                     // 회원가입 버튼
     private Button mbtnCancel;                                       // 뒤로가기 버튼
     private String date;
-    private String getEmail;
+    private String userEmail;
     DatePickerDialog dpd;
 
     @Override
@@ -44,9 +44,12 @@ public class ChangeToSmoke extends AppCompatActivity {
         mbtnComplete = findViewById(R.id.change_to_smoke_btn_finish);
         mbtnCancel = findViewById(R.id.change_to_smoke_btn_cancel);
 
-        Intent intent = getIntent(); //전달할 데이터를 받을 intent
-        getEmail = intent.getStringExtra("email");
-
+        // 현재 로그인한 사용자 가져오기.
+        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fbUser != null) {
+            //로그인 한 사용자가 존재할 경우.
+            userEmail = fbUser.getEmail();
+        }
         //취소 시 설정 화면으로 다시 이동.
         mbtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,16 +112,17 @@ public class ChangeToSmoke extends AppCompatActivity {
                     String email = firebaseUser.getEmail();
                     String uid = firebaseUser.getUid();
                     //문서 추가
-                    DocumentReference docRef = db.collection("users").document(getEmail);
+                    DocumentReference docRef = db.collection("users").document(userEmail);
                     docRef.update("week_smoke",avgSmoke);
                     docRef.update("smoke_bank",smokeBank);
                     docRef.update("start_smoke",startSmoke);
                     docRef.update("stop_smoke",date);
                     docRef.update("flag","smoke");
+
+                    Intent intent = new Intent(ChangeToSmoke.this,LoadingActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
-                Intent intent = new Intent(ChangeToSmoke.this,Smoke_MainActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
     }

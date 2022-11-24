@@ -1,17 +1,34 @@
 package com.sample.stopking_project;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class LoadingActivity extends AppCompatActivity {
     private ImageView iv_drink;
     private ImageView iv_smoke;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance(); // 파이어스토어
+    private String userEmail;
+    private int flag=0; // 0이면 drink, 1이면 smoke 액티비티로 이동.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +40,49 @@ public class LoadingActivity extends AppCompatActivity {
         Glide.with(this).load(R.raw.no_drink).into(iv_drink);
         Glide.with(this).load(R.raw.no_smoke1).into(iv_smoke);
 
+        // 현재 로그인한 사용자 가져오기.
+        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fbUser != null) {
+            //로그인 한 사용자가 존재할 경우.
+            userEmail = fbUser.getEmail();
+        }
+
         //로딩화면 시작.
         loadingStart();
     }
 
     private void loadingStart() {
         Handler handler = new Handler();
+        DocumentReference docRef = db.collection("users").document(userEmail);
+        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.getString("flag").compareTo("drink") == 0) {
+                    flag=0;
+                }
+                else if (value.getString("flag").compareTo("smoke") == 0){
+                    flag=1;
+                }
+            }
+        });
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                if (flag == 0)
+                {
+                    Intent intent = new Intent(LoadingActivity.this, Drink_MainActivity.class);
+                    startActivity(intent);
+                    finish(); // 현재 액티비티 파괴
+                    Toast.makeText(LoadingActivity.this, "금주를 환영합니다!", Toast.LENGTH_SHORT).show();
+                }
+                else if (flag==1)
+                {
+                    Intent intent = new Intent(LoadingActivity.this, Smoke_MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(LoadingActivity.this, "금연을 환영합니다!", Toast.LENGTH_SHORT).show();
+                }
             }
         },3000);
     }

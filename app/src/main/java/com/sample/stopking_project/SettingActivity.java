@@ -62,31 +62,90 @@ public class SettingActivity extends AppCompatActivity {
 
     //금주 / 금연 변경 클릭 시 처리 함수
     public void ChangeMenu(View v) {
-        int flag;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         DocumentReference docRef = db.collection("users").document(getEmail);
         docRef.get().addOnCompleteListener(this, new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                //금주 정보만 있을 때
                 if (task.getResult().getString("start_smoke") == null) {
-                    Intent intent = new Intent(SettingActivity.this, ChangeToSmoke.class);
-                    intent.putExtra("email", getEmail);
-                    startActivity(intent);
+                    builder.setTitle("주의");
+                    builder.setMessage("현재 금연 정보가 존재하지 않습니다. \n 금연 정보를 입력하시곘습니까?");
+                    builder.setIcon(R.drawable.caution);
+
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(SettingActivity.this, ChangeToSmoke.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //아무 일도 발생하지 않는다.
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
+                //금연 정보만 있을 때
                 else if(task.getResult().getString("stop_drink") == null){
-                    Intent intent = new Intent(SettingActivity.this, ChangeToDrink.class);
-                    intent.putExtra("email", getEmail);
-                    startActivity(intent);
+                    builder.setTitle("주의");
+                    builder.setMessage("현재 금주 정보가 존재하지 않습니다. \n 금주 정보를 입력하시곘습니까?");
+                    builder.setIcon(R.drawable.caution);
+
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(SettingActivity.this, ChangeToDrink.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //아무 일도 발생하지 않는다.
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
-                else if ((task.getResult().getString("flag")).compareTo("drink") == 0) { // 금주 테마일 경우
-                    Intent intent = new Intent(SettingActivity.this, Smoke_MainActivity.class);
-                    startActivity(intent);
-                    docRef.update("flag","smoke");
-                    finish();
-                } else if ((task.getResult().getString("flag")).compareTo("smoke") == 0) { // 금연 테마일 경우
-                    Intent intent = new Intent(SettingActivity.this, Drink_MainActivity.class);
-                    startActivity(intent);
-                    docRef.update("flag","drink");
-                    finish();
+                // 금주테마일 경우 금연테마로 변경
+                else
+                {
+                    builder.setTitle("주의");
+                    builder.setMessage("정말 변경하시겠습니까?");
+                    builder.setIcon(R.drawable.caution);
+
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if ((task.getResult().getString("flag")).compareTo("drink") == 0)
+                                docRef.update("flag","smoke");
+                            else if ((task.getResult().getString("flag")).compareTo("smoke") == 0)
+                                docRef.update("flag","drink");
+
+                            Intent intent = new Intent(SettingActivity.this, LoadingActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
+                    });
+
+                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //아무 일도 발생하지 않는다.
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
             }
         });
@@ -159,7 +218,7 @@ public class SettingActivity extends AppCompatActivity {
                     }
                 });
                 //로그인 화면으로 이동.
-                Toast.makeText(SettingActivity.this, "회원탈퇴가 정상적으로 처리되었습니다. 앱 이용을 계속 원하신다면 앱을 재시작해주세요", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingActivity.this, "회원탈퇴가 정상적으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
                 ActivityCompat.finishAffinity(SettingActivity.this);
             }
         });

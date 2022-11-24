@@ -34,7 +34,7 @@ public class ChangeToDrink extends AppCompatActivity {
     private Button mbtnComplete;                                     // 회원가입 버튼
     private Button mbtnCancel;                                       // 뒤로가기 버튼
     private String selectDate;
-    private String getEmail, getPwd, getName;
+    private String userEmail;
     DatePickerDialog dpd;
 
     @Override
@@ -51,10 +51,12 @@ public class ChangeToDrink extends AppCompatActivity {
         mbtnComplete = findViewById(R.id.change_to_drink_btn_complete);
         mbtnCancel = findViewById(R.id.change_to_drink_btn_cancel);
 
-        Intent intent = getIntent(); //전달할 데이터를 받을 intent
-        getEmail = intent.getStringExtra("email");
-        getPwd = intent.getStringExtra("pwd");
-        getName = intent.getStringExtra("name");
+        // 현재 로그인한 사용자 가져오기.
+        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fbUser != null) {
+            //로그인 한 사용자가 존재할 경우.
+            userEmail = fbUser.getEmail();
+        }
 
         //현재 날짜를 가져온다.
         long now = System.currentTimeMillis();
@@ -133,19 +135,21 @@ public class ChangeToDrink extends AppCompatActivity {
                     String email = firebaseUser.getEmail();
                     String uid = firebaseUser.getUid();
 
-                    DocumentReference docRef = db.collection("users").document(getEmail);
+                    DocumentReference docRef = db.collection("users").document(userEmail);
                     docRef.update("average_drink",avgDrink);
                     docRef.update("week_drink",weekDrink);
                     docRef.update("drink_bank",drinkBank);
                     docRef.update("week_bottle",weekBottle);
                     docRef.update("stop_drink",selectDate);
                     docRef.update("flag","drink");
-                }
-                Intent intent = new Intent(ChangeToDrink.this,Drink_MainActivity.class);
-                startActivity(intent);
-                finish();
+
+                    Intent intent = new Intent(ChangeToDrink.this,LoadingActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
 
-    });
-}
+            }
+
+        });
+    }
 }
