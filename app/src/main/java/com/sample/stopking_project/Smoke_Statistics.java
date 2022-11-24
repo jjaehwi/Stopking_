@@ -78,13 +78,13 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
         smokeFrequecny = ((pack*20 / 7) * stopDays);
         packTotal = pack / 7 * stopDays;
         saveTime = smokeFrequecny * 5;
-        saveKcal = packTotal * 12.5;
+        saveKcal = smokeFrequecny * 12.5;
 
         // 총 금주/ 금연 일수 텍스트
         dayTitle = findViewById(R.id.dayTitle);
         // 금연 횟수 텍스트
         smokeFrequencyTitle = findViewById(R.id.smokeFrequencyTitle);
-        // 참은 담배 갑 수 텍스트
+        // 참은 담배  수 텍스트
         countPackTitle = findViewById(R.id.countPackTitle);
         // 아낀 시간 텍스트
         saveTimeTitle = findViewById(R.id.saveTimeTitle);
