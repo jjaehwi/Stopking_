@@ -1,52 +1,36 @@
 package com.sample.stopking_project;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.protobuf.Any;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
-
-import org.checkerframework.checker.regex.qual.Regex;
-import org.checkerframework.framework.qual.Covariant;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Statistics extends AppCompatActivity implements ToolTipsManager.TipListener, View.OnClickListener {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     ImageButton tooltip;
     ToolTipsManager toolTipsManager;
+    TextView dayTitle, drinkFrequencyTitle, countBottlesTitle, saveTimeTitle, saveMoneyTitle;
     TextView tooltipTextView, saveMoneyText, goalMoneyText, progressRatio, cheerText;
     Button goalMoneyButton;
     TextView textView1, textView2, textView3, textView4, textView5, textView6;
@@ -54,10 +38,15 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
     RelativeLayout linearLayout;
     ProgressBar progressBar1, progressBar2;
     ImageView btnBack, btnBack2;
-    private String getEmail;
-    private String getSaveMoney;
-    private String str_drinkBank;
-    private String goalText;
+    private String getEmail; // 유저 로그인할때의 이메일
+    private String str_getSaveMoney; // 현재까지 모인 금액
+    private String str_drinkBank; // 목표 금액
+    private String str_goalText; // 목표 금액 텍스트
+    private String str_WeekDrink; // 일주일에 술자리 몇 번 있는지
+    private String str_Bottles; // 술자리 한번 당 마시는 평균 주량
+    private String str_StopDays; // 금주 시작 일자로 부터 몇일 지났는지
+    private double drinkFrequecny,bottleTotal, saveTime, saveKcal;
+
 
 
 
@@ -82,11 +71,34 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
 
         Intent intent = getIntent(); // 전달한 데이터를 받을 intent
         getEmail = intent.getStringExtra("email");
-        getSaveMoney = intent.getStringExtra("saveMoney"); // bank_info_text를 받아옴 String
+        str_getSaveMoney = intent.getStringExtra("saveMoney"); // bank_info_text를 받아옴 String
+        str_WeekDrink = intent.getStringExtra("weekDrink"); // 일주일에 마시는 술 자리가 몇 번 있는지
+        str_Bottles = intent.getStringExtra("Bottles"); // 평균 마시는 병 수
+        str_StopDays = intent.getStringExtra("stopDays"); // 끊은 일 수
+        double stopDays = Double.parseDouble(str_StopDays);
+        int weekDrink = Integer.parseInt(str_WeekDrink);
+        int bottles = Integer.parseInt(str_Bottles);
+        drinkFrequecny = ((stopDays / 7) * weekDrink);
+        bottleTotal = drinkFrequecny*bottles;
+        saveTime = drinkFrequecny * 2.5;
+        saveKcal = bottleTotal * 408;
+
+        // 총 금주/ 금연 일수 텍스트
+        dayTitle = findViewById(R.id.dayTitle);
+        // 금주 횟수 텍스트
+        drinkFrequencyTitle = findViewById(R.id.drinkFrequencyTitle);
+        // 참은 병 수 텍스트
+        countBottlesTitle = findViewById(R.id.countBottlesTitle);
+        // 아낀 시간 텍스트
+        saveTimeTitle = findViewById(R.id.saveTimeTitle);
+        // 아낀 돈 텍스트
+        saveMoneyTitle = findViewById(R.id.saveMoneyTitle);
+
+
+
 
         // 절약 금액 텍스트
         saveMoneyText = findViewById(R.id.saveMoneyText);
-        System.out.println("절약금액: "+getSaveMoney);
         // 목표 금액 텍스트
         goalMoneyText = findViewById(R.id.goalMoneyText);
         // 진행률 텍스트
@@ -101,18 +113,25 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                dayTitle.setText(str_StopDays + "일 동안,");
+                drinkFrequencyTitle.setText(String.format("%.1f", drinkFrequecny) + " 번의 음주를 쉬었습니다.");
+                countBottlesTitle.setText(String.format("%.1f", bottleTotal) + " 병을 마시지 않았습니다.");
+                saveTimeTitle.setText(String.format("%.1f", saveTime) + " 시간을 아꼈습니다.");
+                saveMoneyTitle.setText(str_getSaveMoney + " 원을 아꼈습니다.");
+                tooltipTextView.setText(String.format("%.1f",saveKcal) + " 칼로리를 참았습니다.");
+
                 str_drinkBank = documentSnapshot.getString("drink_bank");
                     System.out.println(str_drinkBank);
                     goalMoneyText.setText(str_drinkBank);
                     goalMoneyText.setTypeface(null, Typeface.BOLD);
-                    saveMoneyText.setText("총 " + getSaveMoney + "원");
+                    saveMoneyText.setText("총 " + str_getSaveMoney + "원");
 
                 // 버튼 눌러서 목표 금액 받아오기
                 goalMoneyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        goalText = goalMoneyText.getText().toString();
-                        alert_scaner alert = new alert_scaner(Statistics.this,goalText, getEmail);
+                        str_goalText = goalMoneyText.getText().toString();
+                        alert_scaner alert = new alert_scaner(Statistics.this, str_goalText, getEmail);
                         alert.callFunction();
                         alert.setModifyReturnListener(new alert_scaner.ModifyReturnListener() {
                             @Override
@@ -125,8 +144,8 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
 
                 docRef.update("drink_bank",goalMoneyText.getText().toString());
                 // 진행률 계산
-                getSaveMoney = getSaveMoney.replaceAll("[^0-9]","");
-                int saveMoney = Integer.parseInt(getSaveMoney);
+                str_getSaveMoney = str_getSaveMoney.replaceAll("[^0-9]","");
+                int saveMoney = Integer.parseInt(str_getSaveMoney);
                 System.out.println(str_drinkBank);
                 int goalMoney = Integer.parseInt(str_drinkBank);
                 int progress =(int)(((double)saveMoney/goalMoney) * 100);
@@ -158,6 +177,8 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         btnBack = findViewById(R.id.back_main);
         btnBack2 = findViewById(R.id.back_main2);
 
+        textDays.setText(str_StopDays + " 일 동안 금주하셨네요");
+
         // 뒤로 가기 버튼 눌렀을 때 (첫 번째 화면)
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,25 +195,20 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
             }
         });
 
-        String dayStr = textDays.getText().toString();
-        dayStr = dayStr.replaceAll("[^0-9]","");
-        int dayCount = Integer.parseInt(dayStr);
-        System.out.println(dayCount);
-
-        if(dayCount > 0) {
+        if(stopDays > 0) {
             textView1.setEnabled(true);
             textView2.setEnabled(true);
             textView3.setEnabled(true);
         }
-        if(dayCount > 90) {
+        if(stopDays > 90) {
             textView4.setEnabled(true);
             guideText1.setVisibility(View.GONE);
         }
-        if(dayCount > 180){
+        if(stopDays > 180){
             textView5.setEnabled(true);
             guideText2.setVisibility(View.GONE);
         }
-        if(dayCount > 365){
+        if(stopDays > 365){
             textView6.setEnabled(true);
             guideText3.setVisibility(View.GONE);
         }
@@ -200,8 +216,8 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         // 원형 프로그래스바 설정
         progressBar2 = findViewById(R.id.progressbar2);
         currentDays = findViewById(R.id.currentDay);
-        currentDays.setText("현재 "+dayCount+"일");
-        progressBar2.setProgress(dayCount);
+        currentDays.setText("현재 "+str_StopDays+"일");
+        progressBar2.setProgress(Integer.parseInt(str_StopDays));
 
         // initialize tooltip manager
         toolTipsManager = new ToolTipsManager(this);

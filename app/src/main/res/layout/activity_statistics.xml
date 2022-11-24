@@ -86,6 +86,7 @@
                         android:layout_marginTop="25dp"
                         android:layout_weight="1">
                         <TextView
+                            android:id="@+id/dayTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 일 동안,"
@@ -93,31 +94,35 @@
                             android:textSize="56dp"
                             android:layout_marginLeft="20dp"/>
                         <TextView
+                            android:id="@+id/drinkFrequencyTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 번의 음주를 쉬었습니다."
-                            android:textSize="32dp"
+                            android:textSize="24dp"
                             android:layout_marginTop="100dp"
                             android:layout_marginLeft="20dp"/>
                         <TextView
+                            android:id="@+id/countBottlesTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="00 병을 마시지 않았습니다."
-                            android:textSize="32dp"
+                            android:text="000 병을 마시지 않았습니다."
+                            android:textSize="24dp"
                             android:layout_marginTop="170dp"
                             android:layout_marginLeft="20dp"/>
                         <TextView
+                            android:id="@+id/saveTimeTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 시간을 아꼈습니다."
-                            android:textSize="32dp"
+                            android:textSize="24dp"
                             android:layout_marginTop="240dp"
                             android:layout_marginLeft="20dp"/>
                         <TextView
+                            android:id="@+id/saveMoneyTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00000 원을 아꼈습니다."
-                            android:textSize="32dp"
+                            android:textSize="24dp"
                             android:layout_marginTop="310dp"
                             android:layout_marginLeft="20dp"/>
 
@@ -134,7 +139,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0000 칼로리를 참았습니다."
-                            android:textSize="32dp"
+                            android:textSize="24dp"
                             android:layout_marginTop="380dp"
                             android:layout_marginLeft="20dp"/>
                     </RelativeLayout>

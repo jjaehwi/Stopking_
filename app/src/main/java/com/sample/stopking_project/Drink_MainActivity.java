@@ -262,7 +262,11 @@ public class Drink_MainActivity extends AppCompatActivity {
                 // 통계 화면으로 이동
                 Intent intent = new Intent(Drink_MainActivity.this, Statistics.class);
                 intent.putExtra("email", getEmail); // email값 전달
-                intent.putExtra("saveMoney", bank_info_text);
+                intent.putExtra("saveMoney", bank_info_text); // 현재까지 저축한 금액
+                String user_stop_days_str = String.valueOf(user_stop_days);
+                intent.putExtra("stopDays",user_stop_days_str); // 끊은 일 수
+                intent.putExtra("Bottles", getAverageDrink); // 술자리 평균 주량 (n병)
+                intent.putExtra("weekDrink",getWeekDrink); // 일주일 평균 술자리 횟수
                 startActivity(intent);
             }
         });
