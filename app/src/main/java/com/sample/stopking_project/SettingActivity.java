@@ -7,12 +7,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -58,9 +62,35 @@ public class SettingActivity extends AppCompatActivity {
 
     //금주 / 금연 변경 클릭 시 처리 함수
     public void ChangeMenu(View v) {
-
+        int flag;
+        DocumentReference docRef = db.collection("users").document(getEmail);
+        docRef.get().addOnCompleteListener(this, new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.getResult().getString("start_smoke") == null) {
+                    Intent intent = new Intent(SettingActivity.this, ChangeToSmoke.class);
+                    intent.putExtra("email", getEmail);
+                    startActivity(intent);
+                }
+                else if(task.getResult().getString("stop_drink") == null){
+                    Intent intent = new Intent(SettingActivity.this, ChangeToDrink.class);
+                    intent.putExtra("email", getEmail);
+                    startActivity(intent);
+                }
+                else if ((task.getResult().getString("flag")).compareTo("drink") == 0) { // 금주 테마일 경우
+                    Intent intent = new Intent(SettingActivity.this, Smoke_MainActivity.class);
+                    startActivity(intent);
+                    docRef.update("flag","smoke");
+                    finish();
+                } else if ((task.getResult().getString("flag")).compareTo("smoke") == 0) { // 금연 테마일 경우
+                    Intent intent = new Intent(SettingActivity.this, Drink_MainActivity.class);
+                    startActivity(intent);
+                    docRef.update("flag","drink");
+                    finish();
+                }
+            }
+        });
     }
-
     // 금연 / 금주 초기화 클릭 시 처리 함수
     public void initializeMenu(View v) {
 
