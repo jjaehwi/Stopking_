@@ -33,7 +33,7 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
     TextView dayTitle, drinkFrequencyTitle, countBottlesTitle, saveTimeTitle, saveMoneyTitle;
     TextView tooltipTextView, saveMoneyText, goalMoneyText, progressRatio, cheerText;
     Button goalMoneyButton;
-    TextView textView1, textView2, textView3, textView4, textView5, textView6;
+    TextView textView1, textView2, textView3, textView4, textView5, textView6, userNameTitle;
     TextView textDays, currentDays, guideText1, guideText2, guideText3;
     RelativeLayout linearLayout;
     ProgressBar progressBar1, progressBar2;
@@ -45,6 +45,7 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
     private String str_WeekDrink; // 일주일에 술자리 몇 번 있는지
     private String str_Bottles; // 술자리 한번 당 마시는 평균 주량
     private String str_StopDays; // 금주 시작 일자로 부터 몇일 지났는지
+    private String getName;
     private double drinkFrequecny,bottleTotal, saveTime, saveKcal;
 
 
@@ -113,6 +114,7 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+
                 dayTitle.setText(str_StopDays + "일 동안,");
                 drinkFrequencyTitle.setText(String.format("%.1f", drinkFrequecny) + " 번의 음주를 쉬었습니다.");
                 countBottlesTitle.setText(String.format("%.1f", bottleTotal) + " 병을 마시지 않았습니다.");
@@ -171,11 +173,16 @@ public class Statistics extends AppCompatActivity implements ToolTipsManager.Tip
         textView4 = findViewById(R.id.text4);
         textView5 = findViewById(R.id.text5);
         textView6 = findViewById(R.id.text6);
+        userNameTitle = findViewById(R.id.userNameTitle);
         guideText1 = findViewById(R.id.guidetext1);
         guideText2 = findViewById(R.id.guidetext2);
         guideText3 = findViewById(R.id.guidetext3);
         btnBack = findViewById(R.id.back_main);
         btnBack2 = findViewById(R.id.back_main2);
+
+        getName = intent.getStringExtra("userName");
+
+        userNameTitle.setText(getName + " 님은");
 
         textDays.setText(str_StopDays + " 일 동안 금주하셨네요");
 
