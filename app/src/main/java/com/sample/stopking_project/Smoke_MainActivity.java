@@ -241,9 +241,14 @@ public class Smoke_MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 통계 화면으로 이동
-                Intent intent = new Intent(Smoke_MainActivity.this, Statistics.class);
+                Intent intent = new Intent(Smoke_MainActivity.this, Smoke_Statistics.class);
                 intent.putExtra("email", getEmail); // email값 전달
-                intent.putExtra("saveMoney", bank_info_text);
+                intent.putExtra("saveMoney", bank_info_text); // 현재까지 저축한 금액
+                String user_stop_days_str = String.valueOf(user_stop_days);
+                String user_stop_packs_str = String.valueOf(user_stop_packs);
+                intent.putExtra("day", user_stop_days_str); // 금연 일수 전달
+                intent.putExtra("pack", user_stop_packs_str); // 참은 갑 전달
+                intent.putExtra("userName",getName); // 유저 이름
                 startActivity(intent);
             }
         });
@@ -256,9 +261,14 @@ public class Smoke_MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 통계 화면으로 이동
-                Intent intent = new Intent(Smoke_MainActivity.this, Statistics.class);
+                Intent intent = new Intent(Smoke_MainActivity.this, Smoke_Statistics.class);
                 intent.putExtra("email", getEmail); // email값 전달
-                intent.putExtra("saveMoney", bank_info_text);
+                intent.putExtra("saveMoney", bank_info_text); // 현재까지 저축한 금액
+                String user_stop_days_str = String.valueOf(user_stop_days);
+                String user_stop_packs_str = String.valueOf(user_stop_packs);
+                intent.putExtra("day", user_stop_days_str); // 금연 일수 전달
+                intent.putExtra("pack", user_stop_packs_str); // 참은 갑 전달
+                intent.putExtra("userName",getName); // 유저 이름
                 startActivity(intent);
             }
         });

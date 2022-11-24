@@ -246,7 +246,7 @@ public class Drink_MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 메인 액티비티 목표 금액 달성시 버튼 생기고 누르면 통계 화면으로 이동
-                Intent intent = new Intent(Drink_MainActivity.this, Statistics.class);
+                Intent intent = new Intent(Drink_MainActivity.this, Drink_Statistics.class);
                 intent.putExtra("email", getEmail); // email값 전달
                 intent.putExtra("saveMoney", bank_info_text); // 현재까지 저축한 금액
                 String user_stop_days_str = String.valueOf(user_stop_days);
@@ -264,7 +264,7 @@ public class Drink_MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 메인 액티비티 통계 버튼 클릭시 통계 화면으로 이동
-                Intent intent = new Intent(Drink_MainActivity.this, Statistics.class);
+                Intent intent = new Intent(Drink_MainActivity.this, Drink_Statistics.class);
                 intent.putExtra("email", getEmail); // email값 전달
                 intent.putExtra("saveMoney", bank_info_text); // 현재까지 저축한 금액
                 String user_stop_days_str = String.valueOf(user_stop_days);
