@@ -105,7 +105,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".RankingActivity"
+            android:name=".Drink_RankingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Smoke_RankingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

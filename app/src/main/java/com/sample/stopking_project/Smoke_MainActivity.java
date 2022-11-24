@@ -151,16 +151,15 @@ public class Smoke_MainActivity extends AppCompatActivity {
             }
         });
 
-
-        // TODO : 상위 퍼센트 노출
-
         dbReference = db.collection("users");
 
 
         // 나의 랭킹 찾기, 데이터를 모두 가져옴
         TextView main_rank_position = findViewById(R.id.main_rank_position);
 
-        AggregateQuery countQuery = db.collection("users").count();
+        AggregateQuery countQuery = db.collection("users")
+                .whereNotEqualTo("stop_smoke",null)
+                .count();
         countQuery.get(AggregateSource.SERVER).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 AggregateQuerySnapshot snapshot = task.getResult();
@@ -172,7 +171,8 @@ public class Smoke_MainActivity extends AppCompatActivity {
             }
         });
 
-        dbReference.orderBy("stop_drink")
+        dbReference.orderBy("stop_smoke")
+                .whereNotEqualTo("stop_smoke",null)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -202,14 +202,15 @@ public class Smoke_MainActivity extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 getGoal = documentSnapshot.getString("smoke_bank");
+                getName = documentSnapshot.getString("name");
                 double getGoal_double = Double.parseDouble(getGoal);
-                String week_drink_str = documentSnapshot.getString("week_smoke");
-                double week_smoke_double = Double.parseDouble(week_drink_str);
+                String week_smoke_str = documentSnapshot.getString("week_smoke");
+                double week_smoke_double = Double.parseDouble(week_smoke_str);
                 double result = Math.round(getGoal_double / (week_smoke_double * 4500)) * 7;
                 int result_int = (int) result - user_stop_days;
                 if(result_int>0) {
                     String goal_text = String.valueOf(result_int);
-                    bank_goal.setText(goal_text + "일");
+                    bank_goal.setText("D - " + goal_text);
                 } else {
                     bank_goal_title.setText("목표 달성!");
                     bank_goal.setVisibility(View.GONE);
@@ -225,13 +226,13 @@ public class Smoke_MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 랭킹 화면으로 이동
-                Intent intent = new Intent(Smoke_MainActivity.this, RankingActivity.class);
+                Intent intent = new Intent(Smoke_MainActivity.this, Smoke_RankingActivity.class);
                 intent.putExtra("email", getEmail); // email값 전달
                 intent.putExtra("name", getName); // username 전달
                 String user_stop_days_str = String.valueOf(user_stop_days);
                 String user_stop_packs_str = String.valueOf(user_stop_packs);
                 intent.putExtra("day", user_stop_days_str); // 금연 일수 전달
-                intent.putExtra("bottle", user_stop_packs_str); // 참은 갑 전달
+                intent.putExtra("pack", user_stop_packs_str); // 참은 갑 전달
                 startActivity(intent);
             }
         });
@@ -246,6 +247,8 @@ public class Smoke_MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
 
         Button btn_register = findViewById(R.id.btn_statistics);
