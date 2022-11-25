@@ -13,9 +13,9 @@
 
         <TextView
             android:id="@+id/drink_bottle_ranking_user_name"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="60dp"
-            android:text="이름"
+            android:text="남궁민수"
             android:textSize="20dp"
             android:gravity="center|left"
             android:textColor="@color/black"
@@ -23,13 +23,13 @@
 
         <Space
             android:layout_height="match_parent"
-            android:layout_width="215dp"
+            android:layout_width="175dp"
             ></Space>
 
 
         <LinearLayout
             android:layout_height="match_parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="vertical"
             >
 
@@ -38,7 +38,9 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:layout_gravity="right"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
                 >
 
                 <TextView

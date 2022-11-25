@@ -70,8 +70,15 @@ public class ChangeToSmoke extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         //1월은 0부터 시작하기 때문에 +1 해준다.
+                        String getMonth, getDay;
                         month = month + 1;
-                        date = year + "/" + month + "/" + day;
+                        if(0<month && month<10){
+                            getMonth = "0" + month;
+                        } else getMonth = String.valueOf(month);
+                        if(0<day && month<10){
+                            getDay = "0" + day;
+                        } else getDay = String.valueOf(day);
+                        date = year + "/" + getMonth + "/" + getDay;
                     }
                 }, nYear, nMonth, nDay);
                 dpd.show();

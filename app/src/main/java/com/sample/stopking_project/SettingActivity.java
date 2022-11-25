@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,10 +19,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class SettingActivity extends AppCompatActivity {
@@ -41,6 +46,7 @@ public class SettingActivity extends AppCompatActivity {
 
         Intent intent = getIntent(); //전달할 데이터를 받을 intent
         getEmail = intent.getStringExtra("email");
+        DocumentReference docRef = db.collection("users").document(getEmail);
 
         // 뒤로 가기 버튼
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -150,9 +156,81 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
+    public void showSuccessDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("초기화가 완료되었습니다.")
+                .setMessage("다음 번엔 성공할 수 있을거에요!\n(앱이 종료됩니다.)")
+                .setPositiveButton("종료", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ActivityCompat.finishAffinity(SettingActivity.this);
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
     // 금연 / 금주 초기화 클릭 시 처리 함수
     public void initializeMenu(View v) {
+        DocumentReference docRef = db.collection("users").document(getEmail);
+        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String flag = value.getString("flag");
+                if(flag.compareTo("drink")==0){ // 금주일 경우
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
+                    builder.setTitle("주의")
+                            .setMessage("음주를 하셨나요? (금주 정보가 초기화됩니다.)")
+                            .setIcon(R.drawable.caution)
+                            .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    long now = System.currentTimeMillis();
+                                    Date date = new Date(now);
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                                    String getDate = dateFormat.format(date);
+                                    docRef.update("stop_drink",getDate);
+                                    showSuccessDialog();
+                                }
+                            })
+                            .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
+                                }
+                            });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+                else if(flag.compareTo("smoke")==0){ // 금연일 경우
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
+                    builder.setTitle("주의")
+                            .setMessage("흡연을 하셨나요? (금연 정보가 초기화됩니다.)")
+                            .setIcon(R.drawable.caution)
+                            .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    long now = System.currentTimeMillis();
+                                    Date date = new Date(now);
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                                    String getDate = dateFormat.format(date);
+                                    docRef.update("stop_smoke",getDate);
+                                    showSuccessDialog();
+                                }
+                            })
+                            .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            }
+        });
     }
 
     //로그아웃 클릭 시

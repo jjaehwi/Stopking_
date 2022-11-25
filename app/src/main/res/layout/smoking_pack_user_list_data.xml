@@ -23,21 +23,23 @@
 
         <Space
             android:layout_height="match_parent"
-            android:layout_width="215dp"
+            android:layout_width="175dp"
             ></Space>
 
 
         <LinearLayout
             android:layout_height="match_parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="right"
+            android:layout_marginRight="15dp"
             android:orientation="vertical"
             >
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:gravity="right|center_vertical"
                 android:layout_marginTop="8dp"
                 >
 
@@ -76,12 +78,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:gravity="right"
                     android:layout_below="@+id/slash"
                     android:layout_alignRight="@+id/smoke_pack_ranking_rank"
-                    android:text="몇 병"
+                    android:layout_marginTop="4dp"
+                    android:text="일주일 2갑 기준"
                     android:textColor="#284ADE"
                     android:textStyle="italic"
-                    android:textSize="12dp"></TextView>
+                    android:textSize="10dp"></TextView>
 
             </RelativeLayout>
 

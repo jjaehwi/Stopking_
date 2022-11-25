@@ -50,14 +50,16 @@
             android:src="@drawable/people"/>
 
         <TextView
+            android:id="@+id/tv_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:text="술잔과 입술 사이에는 많은 실수가 있다고 한다. - 필라디스"
             android:textColor="@color/black"
             android:textStyle="bold|italic"
             android:textAlignment="center"
-            android:textSize="30dp"/>
-
+            android:textSize="24dp"/>
+            <!--
+            android:text="이 세상에 해내지 못할 것은 없습니다.\n 본인의 의지와 각오를 되새기세요."
+            -->
     </LinearLayout>
 </LinearLayout>

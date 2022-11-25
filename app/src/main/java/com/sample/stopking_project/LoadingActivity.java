@@ -6,10 +6,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.metrics.Event;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -26,17 +29,24 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 public class LoadingActivity extends AppCompatActivity {
     private ImageView iv_drink;
     private ImageView iv_smoke;
+    private TextView text;
     private FirebaseFirestore db = FirebaseFirestore.getInstance(); // 파이어스토어
     private String userEmail;
-    private int flag=0; // 0이면 drink, 1이면 smoke 액티비티로 이동.
+    private int flag; // 0이면 drink, 1이면 smoke 액티비티로 이동.
+    private String drink = "drink";
+    private String smoke = "smoke";
+    private int random;
+    private String ran_str;
+    private String stop_drink;
+    private String stop_smoke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
-
         iv_drink = findViewById(R.id.drink_gif);
         iv_smoke = findViewById(R.id.smoke_gif);
+        text = findViewById(R.id.tv_text);
         Glide.with(this).load(R.raw.no_drink).into(iv_drink);
         Glide.with(this).load(R.raw.no_smoke1).into(iv_smoke);
 
@@ -47,25 +57,53 @@ public class LoadingActivity extends AppCompatActivity {
             userEmail = fbUser.getEmail();
         }
 
+        //무작위 난수 추출 코드 삽입하여야 함.
+        random = (int)(Math.random() * 23 + 1);
+        Log.d("MYTAG", "random : "+random);
+        ran_str = Integer.toString(random);
+        Log.d("MYTAG", "random string : "+ran_str);
+
+        //금주 명언
+        DocumentReference doc = db.collection("stop").document(drink);
+        doc.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                //랜덤한 필드값의 문자열을 가져온다.
+                stop_drink  = value.getString(ran_str);
+            }
+        });
+
+        //금언 명언
+        DocumentReference docu = db.collection("stop").document(smoke);
+        docu.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                //랜덤한 필드값의 문자열을 가져온다.
+                stop_smoke  = value.getString(ran_str);
+            }
+        });
+
+        DocumentReference docRef = db.collection("users").document(userEmail);
+        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.getString("flag").compareTo(drink) == 0) {
+                    text.setText(stop_drink);
+                    flag=0;
+                }
+                else if (value.getString("flag").compareTo(smoke) == 0){
+                    text.setText(stop_smoke);
+                    flag=1;
+                }
+            }
+        });
+
         //로딩화면 시작.
         loadingStart();
     }
 
     private void loadingStart() {
         Handler handler = new Handler();
-        DocumentReference docRef = db.collection("users").document(userEmail);
-        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (value.getString("flag").compareTo("drink") == 0) {
-                    flag=0;
-                }
-                else if (value.getString("flag").compareTo("smoke") == 0){
-                    flag=1;
-                }
-            }
-        });
-
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -32,23 +32,13 @@ public class Drink_RankingActivity extends AppCompatActivity implements View.OnC
     boolean btn_day_active = true;
     boolean btn_bottle_active = false;
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_ranking);
 
-
-
-
         mAuth = FirebaseAuth.getInstance();
         backButton = findViewById(R.id.btn_back);
-        String[][] string_array = new String[110][3];
-
 
         Intent intent = getIntent(); //전달할 데이터를 받을 intent
         getEmail = intent.getStringExtra("email");

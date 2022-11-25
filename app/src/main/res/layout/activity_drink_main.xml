@@ -118,10 +118,11 @@
             <TextView
                 android:id="@+id/bank_info"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:gravity="center"
-                android:textSize="15dp"
+                android:text="3,000,000원"
+                android:textSize="13dp"
                 android:textColor="@color/black"
                 ></TextView>
 

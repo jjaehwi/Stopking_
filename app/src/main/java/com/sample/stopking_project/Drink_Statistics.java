@@ -48,9 +48,6 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
     private String getName;
     private double drinkFrequecny,bottleTotal, saveTime, saveKcal;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

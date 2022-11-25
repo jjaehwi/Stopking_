@@ -151,26 +151,9 @@ public class Smoke_MainActivity extends AppCompatActivity {
             }
         });
 
-        dbReference = db.collection("users");
-
-
         // 나의 랭킹 찾기, 데이터를 모두 가져옴
+        dbReference = db.collection("users");
         TextView main_rank_position = findViewById(R.id.main_rank_position);
-
-        AggregateQuery countQuery = db.collection("users")
-                .whereNotEqualTo("stop_smoke",null)
-                .count();
-        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                AggregateQuerySnapshot snapshot = task.getResult();
-                documentCount = snapshot.getCount();
-                Log.d("ranktest",String.valueOf(documentCount));
-                main_rank_position.setText("상위 " + String.valueOf((int)(((double)my_rank/(double)documentCount)*100)) + "%");
-            } else {
-                Log.d("superdroid", "Count failed: ", task.getException());
-            }
-        });
-
         dbReference.orderBy("stop_smoke")
                 .whereNotEqualTo("stop_smoke",null)
                 .get()
@@ -192,6 +175,21 @@ public class Smoke_MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        AggregateQuery countQuery = db.collection("users")
+                .whereNotEqualTo("stop_smoke",null)
+                .count();
+        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                AggregateQuerySnapshot snapshot = task.getResult();
+                documentCount = snapshot.getCount();
+                Log.d("ranktest",String.valueOf(documentCount));
+                main_rank_position.setText("상위 " + String.valueOf((int)(((double)my_rank/(double)documentCount)*100)) + "%");
+            } else {
+                Log.d("superdroid", "Count failed: ", task.getException());
+            }
+        });
+
 
 
 

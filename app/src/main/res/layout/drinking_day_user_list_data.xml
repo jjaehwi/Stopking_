@@ -13,9 +13,9 @@
 
         <TextView
             android:id="@+id/drink_day_ranking_user_name"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="60dp"
-            android:text="이름"
+            android:text="남궁민수"
             android:textSize="20dp"
             android:gravity="center|left"
             android:textColor="@color/black"
@@ -23,13 +23,15 @@
 
         <Space
             android:layout_height="match_parent"
-            android:layout_width="200dp"
+            android:layout_width="175dp"
             ></Space>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|right"
+            android:gravity="right"
+            android:layout_marginRight="15dp"
             android:orientation="horizontal">
 
             <TextView
