@@ -287,6 +287,16 @@ public class Drink_MainActivity extends AppCompatActivity {
             }
         });
 
+        // 도움 버튼 클릭 시
+        Button btn_help = findViewById(R.id.help_btn);
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Drink_MainActivity.this, Drink_Help.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

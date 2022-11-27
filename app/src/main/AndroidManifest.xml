@@ -15,6 +15,13 @@
         android:theme="@style/Theme.StopKing_project"
         tools:targetApi="31">
         <activity
+            android:name=".Drink_Help"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Smoke_Statistics"
             android:exported="false">
             <meta-data
@@ -50,6 +57,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
