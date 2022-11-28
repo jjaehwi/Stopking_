@@ -30,5 +30,21 @@
             android:textStyle="bold"
             android:layout_gravity="center|top" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="리사이클러 뷰 테스트"
+            android:textSize="32dp"
+            android:padding="8dp"
+            android:gravity="center"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
 </LinearLayout>
