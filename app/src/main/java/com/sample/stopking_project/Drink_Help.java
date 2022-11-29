@@ -72,8 +72,8 @@ public class Drink_Help extends AppCompatActivity {
                     String my_imgUrl = elem.select("li a[class=thumb_img] img").attr("src");
                     String my_link = elem.select("li a").attr("href");
                     list.add(new Drink_Help_Item(my_title, my_imgUrl, my_link, my_summary));
-                    System.out.println("링크 : "+my_link);
                 }
+                // 데이터 확인
                 Log.d("debug :", "List " + mElementDataSize);
 
             } catch (IOException e) {
@@ -91,20 +91,3 @@ public class Drink_Help extends AppCompatActivity {
         }
     }
 }
-//        // 테스트를 위한 더미 데이터 생성
-//        ArrayList<String> testDataSet = new ArrayList<>();
-//        for(int i = 0; i<20; i++){
-//            testDataSet.add("TEST DATA"+i);
-//        }
-//
-//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-//
-//        // LayoutManager 는 아래 3가지 중 하나를 선택하여 사용
-//        // 1) LinearLayoutManager()
-//        // 2) GridLayoutManager()
-//        // 3) StaggeredGridLayoutManager()
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager((Context) this);
-//        recyclerView.setLayoutManager(linearLayoutManager); // LayoutManager 설정
-//
-//        Drink_CustomAdapter drink_customAdapter = new Drink_CustomAdapter(testDataSet);
-//        recyclerView.setAdapter(drink_customAdapter);
