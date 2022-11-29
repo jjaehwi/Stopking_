@@ -10,50 +10,100 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="[회원가입(1/2)]"
+        android:text="[회원가입]"
         android:gravity="center"
         android:background="#2196F3"
         android:textColor="@color/white"
         android:textSize="40dp"
         android:textStyle="bold" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="- 이메일 주소를 입력해주세요. "
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="50dp"
-        android:textSize="24dp"/>
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:hint="아이디/메일 주소 입력"
-        android:inputType="textEmailAddress" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="- 비밀번호를 입력해주세요. "
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:textSize="24dp"/>
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/round_menu_ranking"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
 
-    <EditText
-        android:id="@+id/et_pwd"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:hint="비밀번호 입력"
-        android:inputType="textPassword"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:text="금주/금연 선택"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="45dp"
+                android:background="@drawable/round_gray"
+                android:text="2"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:text="해당 정보 입력"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/round_gray"
+                android:text="3"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="이메일,비밀번호 입력"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -62,7 +112,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:textSize="24dp"/>
 
     <EditText
@@ -112,30 +162,54 @@
         android:textColor="#00FF0A"
         android:textSize="20dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:text="금주/금연 시작 날짜를 선택해주세요!"
+        android:textColor="@color/black"
+        android:textSize="19dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btn_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#2196F3"
+        android:text="날짜 선택하기"
+        android:textSize="24dp"
+        android:textStyle="bold"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="40dp">
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="150dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:backgroundTint="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#E6E5E5"
             android:text="취소"
+            android:textSize="20dp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btn_register"
-            android:layout_width="150dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:backgroundTint="@color/white"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
             android:text="완료 및 다음 단계"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"/>
     </LinearLayout>
 </LinearLayout>

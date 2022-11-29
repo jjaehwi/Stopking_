@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RegisterSmoke">
+    tools:context=".RegisterDrinkEmail">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="[회원가입(2/3)]"
+        android:text="[회원가입(3/3)]"
         android:gravity="center"
         android:background="#2196F3"
         android:textColor="@color/white"
@@ -87,7 +87,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="40dp"
-                android:background="@drawable/round_gray"
+                android:background="@drawable/round_menu_ranking"
                 android:text="3"
                 android:textColor="@color/black"
                 android:textSize="24dp"
@@ -108,126 +108,54 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sevenSmoke_underline"
-        android:textSize="19dp"
+        android:text="- 이메일 주소를 입력해주세요. "
+        android:textColor="@color/black"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="아래에서 선택해주세요!"
-        android:textSize="16dp"
-        android:textColor="@color/black"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/et_avgSmoke"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="갑 선택하기"
-            android:textStyle="bold"
-            android:textSize="24dp" />
-    </LinearLayout>
+        android:layout_marginLeft="15dp"
+        android:hint="아이디/메일 주소 입력"
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/startSmoke_underline"
-        android:textSize="19dp"
+        android:text="- 비밀번호를 입력해주세요. "
+        android:textColor="@color/black"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/et_startSmoke"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="right"
-            android:hint="예 : 2022"
-            android:textSize="24dp"/>
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="년"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
-    </LinearLayout>
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:text="@string/smokeBank_underline"
-        android:textColor="@color/black"
-        android:textSize="19dp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
-        android:text="- 최소 4,500원 이상으로 입력해주세요!"
+        android:text="- 최소 6자리 이상 입력해주세요."
         android:textSize="16dp"
         android:textColor="@color/black"/>
 
-    <TextView
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:text="- 이 금액은 추후에 변경할 수 있어요!"
-        android:textSize="16dp"
-        android:textColor="@color/black"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/smoke_bank"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="right"
-            android:hint="예 : 50000"
-            android:textSize="24dp"/>
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center"
-            android:text="원"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:layout_marginLeft="15dp"
+        android:hint="비밀번호 입력"
+        android:inputType="textPassword"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
         <Button
@@ -235,7 +163,6 @@
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
             android:backgroundTint="#E6E5E5"
             android:text="취소"
             android:textSize="20dp"
@@ -243,14 +170,13 @@
             android:textStyle="bold"/>
 
         <Button
-            android:id="@+id/btn_finish"
+            android:id="@+id/btn_complete"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="40dp"
-            android:text="완료 후 시작하기"
+            android:text="회원가입 완료"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:backgroundTint="#2196F3"/>
+            android:backgroundTint="@color/white"/>
     </LinearLayout>
 </LinearLayout>

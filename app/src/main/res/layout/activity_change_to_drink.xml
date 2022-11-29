@@ -39,7 +39,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="(예) : 한 병 반이라면 1.5, 두 병이라면 2를 입력하세요."
+        android:text="아래에서 선택해주세요!"
         android:textSize="16dp"
         android:textColor="@color/black"
         android:layout_marginTop="5dp"
@@ -47,25 +47,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
-        <EditText
+        <Button
             android:id="@+id/change_to_drink_et_avgDrink"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="right"
-            android:hint="예 : 1 "
-            android:textSize="24dp"/>
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="병"
-            android:textSize="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="병 선택하기"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textSize="24dp" />
     </LinearLayout>
 
     <TextView

@@ -159,7 +159,7 @@
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginTop="70dp"
             android:backgroundTint="@color/black"
             android:background="#4682B4" />
@@ -203,6 +203,7 @@
             android:textStyle="bold"
             android:textSize="24dp"/>
 
+
         <TextView
             android:id="@+id/tv_drinkBank"
             android:layout_width="match_parent"
@@ -212,6 +213,13 @@
             android:layout_marginTop="105dp"
             android:text="공란"
             android:textSize="24dp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="135dp"
+            android:backgroundTint="@color/black"
+            android:background="#4682B4"/>
 
         <TextView
             android:layout_width="180dp"
@@ -232,8 +240,14 @@
             android:layout_marginLeft="190dp"
             android:layout_marginTop="135dp"
             android:text="공란"
-
             android:textSize="24dp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_marginTop="165dp"
+            android:backgroundTint="@color/black"
+            android:background="#4682B4"/>
 
         <TextView
             android:layout_width="230dp"
@@ -380,6 +394,13 @@
             android:text="공란"
             android:textSize="24dp"/>
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="135dp"
+            android:backgroundTint="@color/black"
+            android:background="#4682B4"/>
+
         <TextView
             android:layout_width="180dp"
             android:layout_height="wrap_content"
@@ -400,6 +421,13 @@
             android:layout_marginTop="135dp"
             android:text="공란"
             android:textSize="24dp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="165dp"
+            android:backgroundTint="@color/black"
+            android:background="#4682B4"/>
 
         <TextView
             android:layout_width="260dp"

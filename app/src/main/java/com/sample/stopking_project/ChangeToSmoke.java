@@ -1,8 +1,11 @@
 package com.sample.stopking_project;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,12 +25,14 @@ public class ChangeToSmoke extends AppCompatActivity {
 
     private FirebaseAuth mAuth;                                      // 파이어베이스 인증
     private FirebaseFirestore db = FirebaseFirestore.getInstance();  // 파이어스토어
-    private EditText mEtAvgSmoke, mEtStartSmoke, mEtSmokeBank;        // 금언 관련 회원 정보
+    private EditText mEtStartSmoke, mEtSmokeBank;        // 금언 관련 회원 정보
+    private Button mbtnAvgSmoke;
     private Button mbtnDate;                                         // 금주 시작 날짜 버튼
     private Button mbtnComplete;                                     // 회원가입 버튼
     private Button mbtnCancel;                                       // 뒤로가기 버튼
     private String date;
     private String userEmail;
+    private String selectAvgSmoke;
     DatePickerDialog dpd;
 
     @Override
@@ -37,7 +42,7 @@ public class ChangeToSmoke extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mEtAvgSmoke = findViewById(R.id.change_to_smoke_et_avgSmoke);
+        mbtnAvgSmoke = findViewById(R.id.change_to_smoke_et_avgSmoke);
         mEtStartSmoke = findViewById(R.id.change_to_smoke_et_startSmoke);
         mEtSmokeBank = findViewById(R.id.change_to_smoke_smoke_bank);
         mbtnDate = findViewById(R.id.change_to_smoke_btn_date);
@@ -55,6 +60,34 @@ public class ChangeToSmoke extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        // 몇 갑인지 버튼 클릭 후 선택
+        mbtnAvgSmoke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(ChangeToSmoke.this);
+                dlg.setTitle("일주일에 몇 갑을 피우시나요?"); //제목
+                final String[] versionArray = new String[] {"1갑","2갑","3갑","4갑","5갑","6갑", "7갑"};
+                dlg.setIcon(R.drawable.ciga); // 아이콘 설정
+
+                dlg.setSingleChoiceItems(versionArray, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mbtnAvgSmoke.setText(versionArray[which]);
+                        selectAvgSmoke = versionArray[which];
+                        Log.d("MYTAG", "selectAvgSmoke : " + selectAvgSmoke);
+                    }
+                });
+
+                dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        Log.d("MYTAG", "selectAvgSmoke : " + selectAvgSmoke);
+                    }
+                });
+                dlg.show();
             }
         });
 
@@ -90,12 +123,10 @@ public class ChangeToSmoke extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //예외 처리
-                if (mEtAvgSmoke.getText().toString().equals("") || mEtAvgSmoke.getText().toString() == null) {
-                    //평균 술 먹는 양을 입력 안 했을 경우.
-                    Toast.makeText(ChangeToSmoke.this, "1번 항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                } else if (Integer.parseInt(mEtAvgSmoke.getText().toString()) <= 0) {
-                    //1번 항목에 0갑 이하를 입력했을 경우
-                    Toast.makeText(ChangeToSmoke.this, "1번 항목에서 최소 0.5갑 이상을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                if (selectAvgSmoke == null)
+                {
+                    //평균 담배 갑을 입력 안 했을 경우.
+                    Toast.makeText(ChangeToSmoke.this, "1번 항목을 선택해주세요.", Toast.LENGTH_SHORT).show();
                 } else if (mEtStartSmoke.getText().toString().equals("") || mEtStartSmoke.getText().toString() == null) {
                     //2번 항목 입력 안 했을 경우.
                     Toast.makeText(ChangeToSmoke.this, "2번 항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -111,16 +142,17 @@ public class ChangeToSmoke extends AppCompatActivity {
                 } else
                 {
                     //week_smoke 정보, smoke_bank, start_smoke 정보가 파이어베이스 DB에 저장된다.
-                    String avgSmoke = mEtAvgSmoke.getText().toString();
                     String startSmoke = mEtStartSmoke.getText().toString();
                     String smokeBank = mEtSmokeBank.getText().toString();
+                    String intAvgSmoke = selectAvgSmoke.replaceAll("[^0-9]", "");
+
 
                     FirebaseUser firebaseUser = mAuth.getCurrentUser();
                     String email = firebaseUser.getEmail();
                     String uid = firebaseUser.getUid();
                     //문서 추가
                     DocumentReference docRef = db.collection("users").document(userEmail);
-                    docRef.update("week_smoke",avgSmoke);
+                    docRef.update("week_smoke",intAvgSmoke);
                     docRef.update("smoke_bank",smokeBank);
                     docRef.update("start_smoke",startSmoke);
                     docRef.update("stop_smoke",date);
