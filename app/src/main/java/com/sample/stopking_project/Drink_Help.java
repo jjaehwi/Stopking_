@@ -62,18 +62,20 @@ public class Drink_Help extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                Document doc = Jsoup.connect("https://www.nosmokeguide.go.kr/lay2/bbs/S1T33C110/H/23/list.do").get();
-                Elements mElementDataSize = doc.select("div[class=thumb_style_3] li");
+                Document doc = Jsoup.connect("https://www.hidoc.co.kr/integratesearch/searchnewslist?sortField=pubDt&query=%EC%9D%8C%EC%A3%BC").get();
+                Elements mElementDataSize = doc.select("div[class=coll_info] li");
                 int mElementSize = mElementDataSize.size();
 
                 for (Element elem : mElementDataSize) {
-                    String my_title = elem.select("li p[class=tit]").text();
+                    String my_title = elem.select("li a[class=link_news]").text();
                     String my_summary = elem.select("li p[class=txt]").text();
-                    String my_imgUrl = elem.select("div[class=thumb_style_3] li").attr("img src");
+                    String my_imgUrl = elem.select("li a[class=thumb_img] img").attr("src");
                     String my_link = elem.select("li a").attr("href");
                     list.add(new Drink_Help_Item(my_title, my_imgUrl, my_link, my_summary));
+                    System.out.println("링크 : "+my_link);
                 }
                 Log.d("debug :", "List " + mElementDataSize);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -36,5 +36,13 @@
             android:text="줄거리"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/textView_title" />
+        <TextView
+            android:id="@+id/textView_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="전체 기사 보기"
+            android:textSize="18dp"
+            android:textColor="@color/main_title"/>
     </LinearLayout>
 </LinearLayout>
