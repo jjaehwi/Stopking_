@@ -281,6 +281,15 @@ public class Smoke_MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // 도움 버튼 클릭 시
+        Button btn_help = findViewById(R.id.help_btn);
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Smoke_MainActivity.this, Smoke_Help.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
