@@ -2,10 +2,19 @@ package com.sample.stopking_project;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +47,7 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
     RelativeLayout linearLayout;
     ProgressBar progressBar1, progressBar2;
     ImageView btnBack, btnBack2;
+    Bitmap bitmap;
     private String getEmail; // 유저 로그인할때의 이메일
     private String str_getSaveMoney; // 현재까지 모인 금액
     private String str_drinkBank; // 목표 금액
@@ -46,7 +56,12 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
     private String str_Bottles; // 술자리 한번 당 마시는 평균 주량
     private String str_StopDays; // 금주 시작 일자로 부터 몇일 지났는지
     private String getName;
+    private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel"; // 채널 id
+    private NotificationManager mNotificationManager;
+    private static final int NOTIFICATION_ID = 0;
     private double drinkFrequecny,bottleTotal, saveTime, saveKcal;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +77,7 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
         spec.setIndicator("건 강");
         spec.setContent(R.id.tab_content2);
         tabHost.addTab(spec);
+
 
         tooltip = findViewById(R.id.tooltip);
         tooltipTextView = findViewById(R.id.tooltipTextView);
@@ -105,6 +121,8 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
         cheerText = findViewById(R.id.cheerText);
         // 목표 금액 재설정 버튼
         goalMoneyButton = findViewById(R.id.goalMoneyButton);
+
+
 
         // db에서 데이터 받아오기
         DocumentReference docRef = db.collection("users").document(getEmail);
@@ -151,9 +169,14 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
                 // 프로그래스 바 1
                 progressBar1 = findViewById(R.id.progressbar1);
                 progressBar1.setProgress(progress);
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.attach_money);
 
-                if(progress >= 100)
+                if(progress >= 100) {
                     cheerText.setText("축하합니다! \n목표금액을 달성하셨습니다!");
+                    createNotificationChannel();
+                    sendNotification();
+
+                }
                 else
                     cheerText.setText("티끌 모아 태산! \n목표까지 달려봐요!");
 
@@ -259,4 +282,65 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
             Toast.makeText(getApplicationContext(),"입력해주세요",Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    public void createNotificationChannel()
+    {
+        //notification manager 생성
+        mNotificationManager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
+        // 기기의 SDK 버전 확인 ( SDK 26 버전 이상인지)
+        if(android.os.Build.VERSION.SDK_INT
+                >= android.os.Build.VERSION_CODES.O){
+            //Channel 정의 생성자( construct 이용 )
+            NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID
+                    ,"Goal Notification",mNotificationManager.IMPORTANCE_HIGH);
+            //Channel에 대한 기본 설정
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setDescription("Notification");
+            // Manager을 이용하여 Channel 생성
+            mNotificationManager.createNotificationChannel(notificationChannel);
+        }
+
+    }
+
+
+
+    // Notification Builder를 만드는 메소드
+    private NotificationCompat.Builder getNotificationBuilder() {
+        PendingIntent mPendingIntent = PendingIntent.getActivity(
+                Drink_Statistics.this,
+                0, // 보통 default값 0을 삽입
+                new Intent(getApplicationContext(),Drink_Statistics.class)
+                        .putExtra("email",getEmail)
+                        .putExtra("saveMoney",str_getSaveMoney)
+                        .putExtra("weekDrink",str_WeekDrink)
+                        .putExtra("Bottles",str_Bottles)
+                        .putExtra("stopDays",str_StopDays)
+                ,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
+                .setSmallIcon(R.drawable.attach_money)
+                .setLargeIcon(bitmap)
+                .setContentTitle("목표 금액을 달성했어요!")
+                .setContentText("목표 금액을 다시 설정해볼까요?")
+                .setContentIntent(mPendingIntent);
+
+        return notifyBuilder;
+    }
+
+    // Notification을 보내는 메소드
+    public void sendNotification(){
+        // Builder 생성
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
+        // Manager를 통해 notification 디바이스로 전달
+        mNotificationManager.notify(NOTIFICATION_ID,notifyBuilder.build());
+    }
+
+
+
 }

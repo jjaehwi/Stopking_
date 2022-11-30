@@ -83,7 +83,7 @@
                     android:layout_alignRight="@+id/smoke_pack_ranking_rank"
                     android:layout_marginTop="4dp"
                     android:text="일주일 2갑 기준"
-                    android:textColor="#284ADE"
+                    android:textColor="#0099ff"
                     android:textStyle="italic"
                     android:textSize="10dp"></TextView>
 

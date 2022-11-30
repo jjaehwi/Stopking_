@@ -70,9 +70,7 @@ public class Smoke_Help extends AppCompatActivity {
                     String my_imgUrl = elem.select("li img[class=slickHover]").attr("src");
                     String my_link = elem.select("div[class=content] a").attr("href");
                     list.add(new Smoke_Help_Item(my_title, my_imgUrl, my_link, my_summary));
-                    System.out.println("링크: " + my_link);
                 }
-
                 // 데이터 확인
                 Log.d("debug :", "List " + mElementDataSize);
 

@@ -159,11 +159,13 @@ public class SettingActivity extends AppCompatActivity {
     public void showSuccessDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("초기화가 완료되었습니다.")
-                .setMessage("다음 번엔 성공할 수 있을거에요!\n(앱이 종료됩니다.)")
-                .setPositiveButton("종료", new DialogInterface.OnClickListener() {
+                .setMessage("다음 번엔 성공할 수 있을거에요!")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ActivityCompat.finishAffinity(SettingActivity.this);
+                        Intent intent = new Intent(SettingActivity.this, LoadingActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
                 });
 

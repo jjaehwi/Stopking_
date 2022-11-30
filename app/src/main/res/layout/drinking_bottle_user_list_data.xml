@@ -81,7 +81,7 @@
                     android:layout_below="@+id/slash"
                     android:layout_alignRight="@+id/drink_bottle_ranking_rank"
                     android:text="몇 병"
-                    android:textColor="#284ADE"
+                    android:textColor="#0099ff"
                     android:textStyle="italic"
                     android:textSize="12dp"></TextView>
 

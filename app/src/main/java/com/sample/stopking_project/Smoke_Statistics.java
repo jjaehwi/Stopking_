@@ -2,7 +2,11 @@ package com.sample.stopking_project;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -46,6 +50,9 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
     private String getName;
     private String str_pack;
     private double smokeFrequecny, packTotal, saveTime, saveKcal;
+    private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel"; // 채널 id
+    private NotificationManager mNotificationManager;
+    private static final int NOTIFICATION_ID = 0;
 
 
     @Override
@@ -149,8 +156,11 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
                 progressBar1 = findViewById(R.id.progressbar1);
                 progressBar1.setProgress(progress);
 
-                if (progress >= 100)
+                if (progress >= 100) {
                     cheerText.setText("축하합니다! \n목표금액을 달성하셨습니다!");
+                    createNotificationChannel();
+                    sendNotification();
+                }
                 else
                     cheerText.setText("티끌 모아 태산! \n목표까지 달려봐요!");
 
@@ -259,4 +269,59 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
             Toast.makeText(getApplicationContext(), "입력해주세요", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void createNotificationChannel()
+    {
+        //notification manager 생성
+        mNotificationManager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
+        // 기기의 SDK 버전 확인 ( SDK 26 버전 이상인지)
+        if(android.os.Build.VERSION.SDK_INT
+                >= android.os.Build.VERSION_CODES.O){
+            //Channel 정의 생성자( construct 이용 )
+            NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID
+                    ,"Goal Notification",mNotificationManager.IMPORTANCE_HIGH);
+            //Channel에 대한 기본 설정
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setDescription("Notification");
+            // Manager을 이용하여 Channel 생성
+            mNotificationManager.createNotificationChannel(notificationChannel);
+        }
+
+    }
+
+
+
+    // Notification Builder를 만드는 메소드
+    private NotificationCompat.Builder getNotificationBuilder() {
+        PendingIntent mPendingIntent = PendingIntent.getActivity(
+                Smoke_Statistics.this,
+                0, // 보통 default값 0을 삽입
+                new Intent(getApplicationContext(),Smoke_Statistics.class)
+                        .putExtra("email",getEmail)
+                        .putExtra("saveMoney",str_getSaveMoney)
+                        .putExtra("pack",str_pack)
+                        .putExtra("day",str_StopDays),
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
+                .setSmallIcon(R.drawable.attach_money)
+                .setContentTitle("목표 금액을 달성했어요!")
+                .setContentText("목표 금액을 다시 설정해볼까요?")
+                .setContentIntent(mPendingIntent);
+
+        return notifyBuilder;
+    }
+
+    // Notification을 보내는 메소드
+    public void sendNotification(){
+        // Builder 생성
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
+        // Manager를 통해 notification 디바이스로 전달
+        mNotificationManager.notify(NOTIFICATION_ID,notifyBuilder.build());
+    }
+
 }

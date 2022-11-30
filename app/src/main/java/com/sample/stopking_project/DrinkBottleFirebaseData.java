@@ -52,8 +52,8 @@ public class DrinkBottleFirebaseData {
     }
     public Number getWeek_bottle(){ return week_bottle;}
 
-    public int getBottles(){
-        this.bottles = String.valueOf((week_bottle) * (caculate_day(stop_drink)/7)) ;
+    public int getBottles() {
+        this.bottles = String.valueOf((week_bottle) * (caculate_day(stop_drink)/7));
         return Integer.parseInt(bottles);
         }
 

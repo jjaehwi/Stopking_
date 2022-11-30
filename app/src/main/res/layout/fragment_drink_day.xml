@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:textColor="#284ADE"
+                    android:textColor="#0099ff"
                     android:textStyle="italic"
                     android:textSize="12dp"></TextView>
 
