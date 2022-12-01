@@ -249,6 +249,7 @@ public class Smoke_MainActivity extends AppCompatActivity {
                 intent.putExtra("day", user_stop_days_str); // 금연 일수 전달
                 intent.putExtra("pack", user_stop_packs_str); // 참은 갑 전달
                 intent.putExtra("userName",getName); // 유저 이름
+                intent.putExtra("week_pack",week_smoke_str); // 일주일 간 몇 갑을 피는지..
                 startActivity(intent);
             }
         });
