@@ -64,8 +64,8 @@ public class Drink_MainActivity extends AppCompatActivity {
 
     public static String caculateBank(int average_drink, int week_drink, int days) { // 절약 금액 계산
         int drink_price = 4500;
-        int week = days / 7;
-        int result = week * average_drink * week_drink * drink_price;
+        double week = Math.round((double)days / 7);
+        double result = week * average_drink * week_drink * drink_price;
         DecimalFormat formatter = new DecimalFormat("###,###");  // 수에 콤마 넣기
         String result_str = formatter.format(result);
         return result_str;

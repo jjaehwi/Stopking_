@@ -34,6 +34,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
+import java.text.DecimalFormat;
+
 public class Drink_Statistics extends AppCompatActivity implements ToolTipsManager.TipListener, View.OnClickListener {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -92,9 +94,9 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
         double stopDays = Double.parseDouble(str_StopDays);
         int weekDrink = Integer.parseInt(str_WeekDrink);
         int bottles = Integer.parseInt(str_Bottles);
-        drinkFrequecny = ((stopDays / 7) * weekDrink);
+        drinkFrequecny = Math.round(((stopDays / 7) * weekDrink));
         bottleTotal = drinkFrequecny*bottles;
-        saveTime = drinkFrequecny * 2.5;
+        saveTime = drinkFrequecny * 3;
         saveKcal = bottleTotal * 408;
 
         // 총 금주/ 금연 일수 텍스트
@@ -131,15 +133,16 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
 
                 dayTitle.setText(str_StopDays + "일 동안,");
-                drinkFrequencyTitle.setText(String.format("%.1f", drinkFrequecny) + " 번의 음주를 쉬었습니다.");
-                countBottlesTitle.setText(String.format("%.1f", bottleTotal) + " 병을 마시지 않았습니다.");
-                saveTimeTitle.setText(String.format("%.1f", saveTime) + " 시간을 아꼈습니다.");
+                drinkFrequencyTitle.setText(Math.round(drinkFrequecny) + " 번의 음주를 쉬었습니다.");
+                countBottlesTitle.setText(Math.round(bottleTotal) + " 병을 마시지 않았습니다.");
+                saveTimeTitle.setText(Math.round(saveTime) + " 시간을 아꼈습니다.");
                 saveMoneyTitle.setText(str_getSaveMoney + " 원을 아꼈습니다.");
-                tooltipTextView.setText(String.format("%.1f",saveKcal) + " 칼로리를 참았습니다.");
+                tooltipTextView.setText(Math.round(saveKcal) + " 칼로리를 참았습니다.");
 
                 str_drinkBank = documentSnapshot.getString("drink_bank");
-                    System.out.println(str_drinkBank);
-                    goalMoneyText.setText(str_drinkBank);
+                    DecimalFormat formatter = new DecimalFormat("###,###,###");// 수에 콤마 넣기
+                    int drinkBank_Money = Integer.parseInt(str_drinkBank);
+                    goalMoneyText.setText(formatter.format(drinkBank_Money));
                     goalMoneyText.setTypeface(null, Typeface.BOLD);
                     saveMoneyText.setText("총 " + str_getSaveMoney + "원");
 
@@ -163,12 +166,12 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
                 int saveMoney = Integer.parseInt(str_getSaveMoney);
                 System.out.println(str_drinkBank);
                 int goalMoney = Integer.parseInt(str_drinkBank);
-                int progress =(int)(((double)saveMoney/goalMoney) * 100);
+                double progress =(((double)saveMoney/goalMoney) * 100);
 
-                progressRatio.setText("진행률 : "+progress+"%");
+                progressRatio.setText("진행률 : "+String.format("%.1f",progress)+"%");
                 // 프로그래스 바 1
                 progressBar1 = findViewById(R.id.progressbar1);
-                progressBar1.setProgress(progress);
+                progressBar1.setProgress((int)progress);
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.attach_money);
 
                 if(progress >= 100) {
