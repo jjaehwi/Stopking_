@@ -1,6 +1,7 @@
 package com.sample.stopking_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -85,6 +86,7 @@ public class Drink_Help extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             Drink_CustomAdapter drink_customAdapter = new Drink_CustomAdapter(list);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(drink_customAdapter);
             progressDialog.dismiss();
