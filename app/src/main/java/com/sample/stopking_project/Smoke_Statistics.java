@@ -29,6 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
+import java.text.DecimalFormat;
+
 public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManager.TipListener, View.OnClickListener{
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -49,7 +51,8 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
     private String str_StopDays; // 금주 시작 일자로 부터 몇일 지났는지
     private String getName;
     private String str_pack;
-    private double smokeFrequecny, packTotal, saveTime, saveKcal;
+    private String str_WeekPack;
+    private double smokeFrequency, packTotal, saveTime, saveKcal;
     private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel"; // 채널 id
     private NotificationManager mNotificationManager;
     private static final int NOTIFICATION_ID = 0;
@@ -80,12 +83,13 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
         str_getSaveMoney = intent.getStringExtra("saveMoney"); // bank_info_text를 받아옴 String
         str_pack = intent.getStringExtra("pack");
         str_StopDays = intent.getStringExtra("day"); // 끊은 일 수
+        str_WeekPack = intent.getStringExtra("week_pack");
+        int weekPack = Integer.parseInt(str_WeekPack);
         double stopDays = Double.parseDouble(str_StopDays);
         double pack = Double.parseDouble(str_pack);
-        smokeFrequecny = ((pack*20 / 7) * stopDays);
-        packTotal = pack / 7 * stopDays;
-        saveTime = smokeFrequecny * 5;
-        saveKcal = smokeFrequecny * 12.5;
+        smokeFrequency = Math.round(((double)weekPack*20 / 7) * stopDays);
+        saveTime = smokeFrequency * 5;
+        saveKcal = smokeFrequency * 12.5;
 
         // 총 금주/ 금연 일수 텍스트
         dayTitle = findViewById(R.id.dayTitle);
@@ -117,15 +121,16 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
 
                 dayTitle.setText(str_StopDays + "일 동안,");
-                smokeFrequencyTitle.setText(String.format("%.1f", smokeFrequecny) + " 번의 흡연를 쉬었습니다.");
-                countPackTitle.setText(String.format("%.1f", packTotal) + " 갑을 피우지 않았습니다.");
-                saveTimeTitle.setText(String.format("%.1f", saveTime) + " 분을 아꼈습니다.");
+                smokeFrequencyTitle.setText(Math.round(smokeFrequency) + " 번의 흡연를 쉬었습니다.");
+                countPackTitle.setText("약 "+Math.round(pack) + " 갑을 피우지 않았습니다.");
+                saveTimeTitle.setText(Math.round(saveTime) + " 분을 아꼈습니다.");
                 saveMoneyTitle.setText(str_getSaveMoney + " 원을 아꼈습니다.");
-                tooltipTextView.setText(String.format("%.1f", saveKcal) + " 칼로리를 참았습니다.");
+                tooltipTextView.setText(Math.round(saveKcal) + " 칼로리를 참았습니다.");
 
                 str_smokeBank = documentSnapshot.getString("smoke_bank");
-                System.out.println(str_smokeBank);
-                goalMoneyText.setText(str_smokeBank);
+                DecimalFormat formatter = new DecimalFormat("###,###,###");// 수에 콤마 넣기
+                int smokeBank_Money = Integer.parseInt(str_smokeBank);
+                goalMoneyText.setText(formatter.format(smokeBank_Money));
                 goalMoneyText.setTypeface(null, Typeface.BOLD);
                 saveMoneyText.setText("총 " + str_getSaveMoney + "원");
 
@@ -149,12 +154,12 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
                 str_getSaveMoney = str_getSaveMoney.replaceAll("[^0-9]", "");
                 int saveMoney = Integer.parseInt(str_getSaveMoney);
                 int goalMoney = Integer.parseInt(str_smokeBank);
-                int progress = (int) (((double) saveMoney / goalMoney) * 100);
+                double progress = (((double) saveMoney / goalMoney) * 100);
 
-                progressRatio.setText("진행률 : " + progress + "%");
+                progressRatio.setText("진행률 : " + String.format("%.1f",progress) + "%");
                 // 프로그래스 바 1
                 progressBar1 = findViewById(R.id.progressbar1);
-                progressBar1.setProgress(progress);
+                progressBar1.setProgress((int)progress);
 
                 if (progress >= 100) {
                     cheerText.setText("축하합니다! \n목표금액을 달성하셨습니다!");

@@ -40,7 +40,7 @@ public class Smoke_MainActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference dbReference;
     private int user_stop_days; // 금연 일수
-    private int user_stop_packs; // 몇 갑 참았는지
+    private double user_stop_packs; // 몇 갑 참았는지
     private long documentCount;
     private Button settings;
     private String getName;
@@ -48,6 +48,7 @@ public class Smoke_MainActivity extends AppCompatActivity {
     private String getGoal;
     private String getRank;
     private String bank_info_text;
+    private String week_smoke_str;
     public int my_rank = 1;
 
 
@@ -62,10 +63,9 @@ public class Smoke_MainActivity extends AppCompatActivity {
         return date;
     }
 
-    public static String caculateBank(int week_smoke, int days) { // 절약 금액 계산
+    public static String caculateBank(double user_stop_packs, int days) { // 절약 금액 계산
         int smoke_price = 4500;
-        int week = days / 7;
-        int result = week * week_smoke * smoke_price;
+        double result = Math.round(user_stop_packs * smoke_price);
         DecimalFormat formatter = new DecimalFormat("###,###");  // 수에 콤마 넣기
         String result_str = formatter.format(result);
         return result_str;
@@ -122,11 +122,13 @@ public class Smoke_MainActivity extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 TextView bank_info = findViewById(R.id.bank_info);
 
-                String week_smoke_str = documentSnapshot.getString("week_smoke");
+                week_smoke_str = documentSnapshot.getString("week_smoke");
                 int week_smoke_int = Integer.parseInt(week_smoke_str);
 
-                bank_info_text = caculateBank(week_smoke_int, user_stop_days);
-                user_stop_packs = user_stop_days / 7 * week_smoke_int;
+
+                user_stop_packs = Math.round(((Math.round((double)user_stop_days / 7)) * week_smoke_int));
+                System.out.println("packs: "+user_stop_packs);
+                bank_info_text = caculateBank(user_stop_packs, user_stop_days);
                 bank_info.setText(bank_info_text + "원");
             }
         });
@@ -267,6 +269,7 @@ public class Smoke_MainActivity extends AppCompatActivity {
                 intent.putExtra("day", user_stop_days_str); // 금연 일수 전달
                 intent.putExtra("pack", user_stop_packs_str); // 참은 갑 전달
                 intent.putExtra("userName",getName); // 유저 이름
+                intent.putExtra("week_pack",week_smoke_str); // 일주일 간 몇 갑을 피는지..
                 startActivity(intent);
             }
         });
