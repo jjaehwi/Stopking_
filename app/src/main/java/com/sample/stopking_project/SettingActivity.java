@@ -35,6 +35,7 @@ public class SettingActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance(); // 파이어스토어
     private String getEmail;
+    AlertDialog initAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,8 +158,8 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
     public void showSuccessDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("초기화가 완료되었습니다.")
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+        builder2.setTitle("초기화가 완료되었습니다.")
                 .setMessage("다음 번엔 성공할 수 있을거에요!")
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
@@ -169,8 +170,8 @@ public class SettingActivity extends AppCompatActivity {
                     }
                 });
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        AlertDialog successAlertDialog = builder2.create();
+        successAlertDialog.show();
     }
 
 
@@ -203,8 +204,8 @@ public class SettingActivity extends AppCompatActivity {
 
                                 }
                             });
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
+                    initAlertDialog = builder.create();
+                    if(!initAlertDialog.isShowing())initAlertDialog.show();
                 }
                 else if(flag.compareTo("smoke")==0){ // 금연일 경우
                     AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
@@ -228,8 +229,8 @@ public class SettingActivity extends AppCompatActivity {
 
                                 }
                             });
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
+                    initAlertDialog = builder.create();
+                    if(!initAlertDialog.isShowing())initAlertDialog.show();
                 }
             }
         });

@@ -80,7 +80,7 @@
                         android:id="@+id/smokeFrequencyTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="00 번의 흡연를 쉬었습니다."
+                        android:text="00 번의 흡연을 쉬었습니다."
                         android:textSize="28dp"
                         android:layout_marginTop="40dp"
                         android:layout_marginLeft="20dp"

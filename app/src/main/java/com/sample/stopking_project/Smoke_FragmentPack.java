@@ -139,7 +139,7 @@ public class Smoke_FragmentPack extends Fragment {
                                     int my_rank=i+1;
                                     my_ranking_rank.setText(my_rank+"위");
                                     my_ranking_position.setText("일주일 "+list.get(i).getWeek_smoke()+"갑 기준");
-                                    my_ranking_pack.setText(list.get(i).getPacks()+"갑");
+                                    my_ranking_pack.setText(list.get(i).getDoublePacks()+"갑");
                                     break;
                                 }
                             }

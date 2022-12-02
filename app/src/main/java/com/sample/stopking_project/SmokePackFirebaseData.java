@@ -12,6 +12,7 @@ public class SmokePackFirebaseData {
     private String week_smoke;
     private String stop_smoke;
     private int packs;
+    private int packs_double;
 
 
     public static Date convertStringtoDate(String Date){ // 데이터베이스에서 가져온 날짜 변환
@@ -51,6 +52,14 @@ public class SmokePackFirebaseData {
         this.packs = (Integer.parseInt(week_smoke)*(caculate_day(stop_smoke)/7));
         return packs;
         }
+
+    public int getDoublePacks(){
+        this.packs_double = (int)Math.round((Math.round(
+                Math.round((double)(caculate_day(stop_smoke))/7)
+                        * Integer.parseInt(getWeek_smoke()))
+                ));
+        return packs_double;
+    }
 
 
     public String getEmail() {

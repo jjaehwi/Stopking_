@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DrinkBottleFirebaseData {
-    // 어떤 data를 가져올지 여기서 선택함.
     private String average_drink;
     private String email;
     private String name;
@@ -14,6 +13,7 @@ public class DrinkBottleFirebaseData {
     private String stop_drink;
     private int week_bottle;
     private String bottles;
+    private int bottles_double;
 
     public static Date convertStringtoDate(String Date){ // 데이터베이스에서 가져온 날짜 변환
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -42,11 +42,11 @@ public class DrinkBottleFirebaseData {
 
     public DrinkBottleFirebaseData() {}
 
+
+    public String getWeek_drink() { return week_drink; }
     public String getStop_drink() {
         return stop_drink;
     }
-
-
     public String getAverage_drink() {
         return average_drink;
     }
@@ -56,6 +56,14 @@ public class DrinkBottleFirebaseData {
         this.bottles = String.valueOf((week_bottle) * (caculate_day(stop_drink)/7));
         return Integer.parseInt(bottles);
         }
+
+    public int getDoubleBottles(){
+        this.bottles_double = (int)Math.round((Math.round(
+                ((double)(caculate_day(stop_drink)))/7
+                        *Double.parseDouble(getWeek_drink()))
+                * Double.parseDouble(getAverage_drink())));
+                return bottles_double;
+    }
 
 
     public String getEmail() {
@@ -68,9 +76,5 @@ public class DrinkBottleFirebaseData {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getWeek_drink() {
-        return week_drink;
     }
 }

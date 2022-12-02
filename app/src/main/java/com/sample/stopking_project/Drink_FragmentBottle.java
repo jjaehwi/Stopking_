@@ -138,7 +138,7 @@ public class Drink_FragmentBottle extends Fragment {
                                     int my_rank=i+1;
                                     my_ranking_rank.setText(my_rank+"위");
                                     my_ranking_position.setText("평균 주량 : "+list.get(i).getAverage_drink()+"병");
-                                    my_ranking_bottle.setText(list.get(i).getBottles()+"병");
+                                    my_ranking_bottle.setText(list.get(i).getDoubleBottles()+"병");
                                     break;
                                 }
                             }
