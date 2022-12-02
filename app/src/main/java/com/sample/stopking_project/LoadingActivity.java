@@ -26,6 +26,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.util.Objects;
+
 public class LoadingActivity extends AppCompatActivity {
     private ImageView iv_drink;
     private ImageView iv_smoke;
@@ -59,47 +61,46 @@ public class LoadingActivity extends AppCompatActivity {
 
         //무작위 난수 추출 코드 삽입하여야 함.
         random = (int)(Math.random() * 23 + 1);
-        Log.d("MYTAG", "random : "+random);
+        Log.d("TEST", "random : "+random);
         ran_str = Integer.toString(random);
-        Log.d("MYTAG", "random string : "+ran_str);
-
-        //금주 명언
-        DocumentReference doc = db.collection("stop").document(drink);
-        doc.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                //랜덤한 필드값의 문자열을 가져온다.
-                stop_drink  = value.getString(ran_str);
-            }
-        });
-
-        //금언 명언
-        DocumentReference docu = db.collection("stop").document(smoke);
-        docu.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                //랜덤한 필드값의 문자열을 가져온다.
-                stop_smoke  = value.getString(ran_str);
-            }
-        });
 
         DocumentReference docRef = db.collection("users").document(userEmail);
         docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (value.getString("flag").compareTo(drink) == 0) {
-                    text.setText(stop_drink);
-                    flag=0;
+                flag = Objects.equals(value.getString("flag"), drink) ? 0 : 1;
+                if (flag==0)
+                {
+                    setStopText(drink);
+                    loadingStart();
                 }
-                else if (value.getString("flag").compareTo(smoke) == 0){
-                    text.setText(stop_smoke);
-                    flag=1;
+                else if (flag==1)
+                {
+                    setStopText(smoke);
+                    loadingStart();
                 }
             }
         });
+    }
 
-        //로딩화면 시작.
-        loadingStart();
+    private void setStopText(String type)
+    {
+        DocumentReference doc = db.collection("stop").document(type);
+        doc.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (type.equals(drink))
+                {
+                    stop_drink = value.getString(ran_str);
+                    text.setText(stop_drink);
+                }
+                else if(type.equals(smoke))
+                {
+                    stop_smoke = value.getString(ran_str);
+                    text.setText(stop_smoke);
+                }
+            }
+        });
     }
 
     private void loadingStart() {

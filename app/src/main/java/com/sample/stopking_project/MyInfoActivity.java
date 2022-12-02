@@ -58,7 +58,7 @@ public class MyInfoActivity extends AppCompatActivity {
     private String str_stopSmokeDate;
     private String str_weekCountCiga;
     private String str_smokeBank;
-
+    private String str_stop_pack;
 
     //참은 날짜, 참은 병/갑 개수를 위한 변수
     private int stop_drinkDay; //금주 참은 날짜
@@ -66,8 +66,10 @@ public class MyInfoActivity extends AppCompatActivity {
     private int bottles;
     private int average_drink_int;
     private int week_drink_int;
+    private int weeklySmoke;
 
     private double drinkFrequecny,bottleTotal;
+    private double pack;
 
 
     // 데이터베이스에서 가져온 날짜 변환을 위한 함수
@@ -216,9 +218,9 @@ public class MyInfoActivity extends AppCompatActivity {
                 if ((bottles != 0) && (week_drink_int != 0))
                 {
                     double stopDays = Double.parseDouble(str_day);
-                    drinkFrequecny = ((stopDays / 7) * week_drink_int);
+                    drinkFrequecny = Math.round(((stopDays / 7) * week_drink_int));
                     bottleTotal = drinkFrequecny*bottles;
-                    countBottle.setText(String.format("%.1f", bottleTotal) + " 병");
+                    countBottle.setText(Math.round(bottleTotal) +" 병");
                     countBottle.setTypeface(null, Typeface.BOLD);
                     countBottle.setTextColor(Color.BLACK);
                 }
@@ -244,6 +246,7 @@ public class MyInfoActivity extends AppCompatActivity {
                 // 일주일에 태우는 담배 갑 개수
                 str_weekCountCiga = documentSnapshot.getString("week_smoke");
                 if (str_weekCountCiga != null) {
+                    weeklySmoke = Integer.parseInt(str_weekCountCiga); // 참은 담배 갑 개수를 위한 변수 설정
                     weekCountCiga.setText(str_weekCountCiga + " 갑");
                     weekCountCiga.setTypeface(null, Typeface.BOLD);
                     weekCountCiga.setTextColor(Color.BLACK);
@@ -283,7 +286,14 @@ public class MyInfoActivity extends AppCompatActivity {
 
 
                 //내가 참은 갑 개수는 구현 예정.
-
+                if (weeklySmoke != 0)
+                {
+                    pack = Math.round(((Math.round((double)stop_smokeDay / 7)) * weeklySmoke));
+                    str_stop_pack = String.valueOf(Math.round(pack));
+                    countStopCiga.setText(str_stop_pack + "갑");
+                    countStopCiga.setTypeface(null, Typeface.BOLD);
+                    countStopCiga.setTextColor(Color.BLACK);
+                }
             }
         });
     }
