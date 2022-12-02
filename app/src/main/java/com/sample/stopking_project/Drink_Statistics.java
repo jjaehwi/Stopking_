@@ -7,15 +7,13 @@ import androidx.core.app.NotificationCompat;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -41,10 +39,10 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     ImageButton tooltip;
     ToolTipsManager toolTipsManager;
-    TextView dayTitle, drinkFrequencyTitle, countBottlesTitle, saveTimeTitle, saveMoneyTitle;
+    TextView userNameTitle1, dayTitle, drinkFrequencyTitle, countBottlesTitle, saveTimeTitle, saveMoneyTitle;
     TextView tooltipTextView, saveMoneyText, goalMoneyText, progressRatio, cheerText;
     Button goalMoneyButton;
-    TextView textView1, textView2, textView3, textView4, textView5, textView6, userNameTitle;
+    TextView textView1, textView2, textView3, textView4, textView5, textView6, userNameTitle2;
     TextView textDays, currentDays, guideText1, guideText2, guideText3;
     RelativeLayout linearLayout;
     ProgressBar progressBar1, progressBar2;
@@ -99,6 +97,8 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
         saveTime = drinkFrequecny * 3;
         saveKcal = bottleTotal * 408;
 
+        // 이름 텍스트
+        userNameTitle1 = findViewById(R.id.userNameTitle1);
         // 총 금주/ 금연 일수 텍스트
         dayTitle = findViewById(R.id.dayTitle);
         // 금주 횟수 텍스트
@@ -132,12 +132,13 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
 
-                dayTitle.setText(str_StopDays + "일 동안,");
-                drinkFrequencyTitle.setText(Math.round(drinkFrequecny) + " 번의 음주를 쉬었습니다.");
-                countBottlesTitle.setText(Math.round(bottleTotal) + " 병을 마시지 않았습니다.");
-                saveTimeTitle.setText(Math.round(saveTime) + " 시간을 아꼈습니다.");
-                saveMoneyTitle.setText(str_getSaveMoney + " 원을 아꼈습니다.");
-                tooltipTextView.setText(Math.round(saveKcal) + " 칼로리를 참았습니다.");
+                userNameTitle1.setText(Html.fromHtml("<b>"+getName+"</b>"+" 님은"));
+                dayTitle.setText(Html.fromHtml("<b>"+str_StopDays+"일</b>"+ " 동안,"));
+                drinkFrequencyTitle.setText(Html.fromHtml("<b>"+(Math.round(drinkFrequecny)+" 번</b>"+" 의 음주를 쉬었습니다.")));
+                countBottlesTitle.setText(Html.fromHtml("<b>"+(Math.round(bottleTotal)+" 병</b>"+" 을 마시지 않았습니다.")));
+                saveTimeTitle.setText(Html.fromHtml("<b>"+(Math.round(saveTime)+" 시간</b>" + " 을 아꼈습니다.")));
+                saveMoneyTitle.setText(Html.fromHtml("<b>"+(str_getSaveMoney +" 원</b>" +" 을 아꼈습니다.")));
+                tooltipTextView.setText(Html.fromHtml("<b>"+(Math.round(saveKcal)+" kcal</b>" + " 를 참았습니다.")));
 
                 str_drinkBank = documentSnapshot.getString("drink_bank");
                     DecimalFormat formatter = new DecimalFormat("###,###,###");// 수에 콤마 넣기
@@ -194,7 +195,7 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
         textView4 = findViewById(R.id.text4);
         textView5 = findViewById(R.id.text5);
         textView6 = findViewById(R.id.text6);
-        userNameTitle = findViewById(R.id.userNameTitle);
+        userNameTitle2 = findViewById(R.id.userNameTitle2);
         guideText1 = findViewById(R.id.guidetext1);
         guideText2 = findViewById(R.id.guidetext2);
         guideText3 = findViewById(R.id.guidetext3);
@@ -203,7 +204,7 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
 
         getName = intent.getStringExtra("userName");
 
-        userNameTitle.setText(getName + " 님은");
+        userNameTitle2.setText(getName + " 님은");
 
         textDays.setText(str_StopDays + " 일 동안 금주하셨네요");
 

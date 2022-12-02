@@ -47,117 +47,109 @@
                             android:textSize="48dp"
                             android:textStyle="bold"
                             android:layout_gravity="center|top" />
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="25dp"
-                        android:layout_weight="4">
-                            <TextView
-                                android:id="@+id/progress_days"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="00 Days |"
-                                android:textSize="28dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_gravity="center"/>
-                            <TextView
-                                android:id="@+id/progress_hours"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="00 hours |"
-                                android:textSize="28dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_gravity="center"/>
-                            <TextView
-                                android:id="@+id/progress_minute"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="00 min"
-                                android:textSize="28dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_gravity="center"/>
                     </LinearLayout>
-
                     <RelativeLayout
                         android:id="@+id/linearlayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="1">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/black"/>
+                        <TextView
+                            android:id="@+id/userNameTitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="000 님은"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="25dp"
+                            android:textSize="56dp" />
                         <TextView
                             android:id="@+id/dayTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 일 동안,"
-                            android:textStyle="bold"
                             android:textSize="56dp"
-                            android:layout_marginLeft="20dp"/>
+                            android:layout_below="@id/userNameTitle1"
+                            android:layout_marginLeft="100dp"
+                            />
                         <TextView
                             android:id="@+id/drinkFrequencyTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 번의 음주를 쉬었습니다."
-                            android:textSize="24dp"
-                            android:layout_marginTop="100dp"
-                            android:layout_marginLeft="20dp"/>
+                            android:textSize="28dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_below="@id/dayTitle"/>
                         <TextView
                             android:id="@+id/countBottlesTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="000 병을 마시지 않았습니다."
-                            android:textSize="24dp"
-                            android:layout_marginTop="170dp"
-                            android:layout_marginLeft="20dp"/>
+                            android:textSize="28dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_below="@+id/drinkFrequencyTitle"/>
                         <TextView
                             android:id="@+id/saveTimeTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 시간을 아꼈습니다."
-                            android:textSize="24dp"
-                            android:layout_marginTop="240dp"
-                            android:layout_marginLeft="20dp"/>
+                            android:textSize="28dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_below="@id/countBottlesTitle"/>
                         <TextView
                             android:id="@+id/saveMoneyTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00000 원을 아꼈습니다."
-                            android:textSize="24dp"
-                            android:layout_marginTop="310dp"
-                            android:layout_marginLeft="20dp"/>
+                            android:textSize="26dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_below="@id/saveTimeTitle"/>
 
                         <ImageButton
                             android:id="@+id/tooltip"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
+                            android:layout_marginTop="5dp"
                             android:layout_marginLeft="180dp"
-                            android:layout_marginTop="365dp"
-                            android:src="@drawable/free_icon_xclamation_mark"/>
+                            android:src="@drawable/free_icon_xclamation_mark"
+                            android:layout_below="@id/saveMoneyTitle"
+                            />
                         <TextView
                             android:id="@+id/tooltipTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0000 칼로리를 참았습니다."
-                            android:textSize="24dp"
-                            android:layout_marginTop="380dp"
-                            android:layout_marginLeft="20dp"/>
+                            android:textSize="26dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_below="@id/saveMoneyTitle"/>
                     </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:layout_marginTop="50dp">
+                        android:layout_marginTop="25dp">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/black"/>
                         <TextView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="현재까지 모은 금액"
                             android:textStyle="bold"
                             android:textSize="42dp"
+                            android:layout_marginTop="25dp"
                             android:layout_marginLeft="20dp"/>
                         <TextView
                             android:id="@+id/saveMoneyText"
@@ -217,6 +209,15 @@
                             android:textStyle="italic"
                             android:layout_marginTop="30dp"
                             android:layout_marginLeft="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="목표 금액 재설정 시 , 는 빼고 입력해주세요"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBackground"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"/>
                         <Button
                             android:id="@+id/goalMoneyButton"
                             android:layout_width="wrap_content"
@@ -268,7 +269,7 @@
                     android:orientation="vertical"
                     android:layout_weight="2">
                     <TextView
-                        android:id="@+id/userNameTitle"
+                        android:id="@+id/userNameTitle2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
