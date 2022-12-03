@@ -199,9 +199,9 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
 
         getName = intent.getStringExtra("userName");
 
-        userNameTitle2.setText(getName + " 님은");
+        userNameTitle2.setText(Html.fromHtml("<b>"+getName+"</b>"+" 님은"));
 
-        textDays.setText(str_StopDays + " 일 동안 금연하셨네요");
+        textDays.setText(Html.fromHtml("<b>"+str_StopDays + "</b>" +" 일 동안 금연하셨네요"));
 
         // 뒤로 가기 버튼 눌렀을 때 (첫 번째 화면)
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +241,8 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
         progressBar2 = findViewById(R.id.progressbar2);
         currentDays = findViewById(R.id.currentDay);
         currentDays.setText("현재 " + str_StopDays + "일");
-        progressBar2.setProgress(Integer.parseInt(str_StopDays));
+        double progressCalculate = ((double)(Integer.parseInt(str_StopDays) / (double)365)*100);
+        progressBar2.setProgress((int)progressCalculate);
 
         // initialize tooltip manager
         toolTipsManager = new ToolTipsManager(this);
