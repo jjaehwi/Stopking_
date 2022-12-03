@@ -123,14 +123,12 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
 
-<<<<<<< Updated upstream
                 dayTitle.setText(str_StopDays + "일 동안,");
                 smokeFrequencyTitle.setText(Math.round(smokeFrequency) + " 번의 흡연을 쉬었습니다.");
                 countPackTitle.setText("약 "+Math.round(pack) + " 갑을 피우지 않았습니다.");
                 saveTimeTitle.setText(Math.round(saveTime) + " 분을 아꼈습니다.");
                 saveMoneyTitle.setText(str_getSaveMoney + " 원을 아꼈습니다.");
                 tooltipTextView.setText(Math.round(saveKcal) + " 칼로리를 참았습니다.");
-=======
                 userNameTitle1.setText(Html.fromHtml("<b>"+getName+"</b>"+" 님은"));
                 dayTitle.setText(Html.fromHtml("<b>"+str_StopDays+"일</b>"+ " 동안,"));
                 smokeFrequencyTitle.setText(Html.fromHtml("<b>"+(Math.round(smokeFrequency)+" 번</b>"+" 의 흡연를 쉬었습니다.")));
@@ -138,7 +136,6 @@ public class Smoke_Statistics extends AppCompatActivity implements ToolTipsManag
                 saveTimeTitle.setText(Html.fromHtml("<b>"+(Math.round(saveTime)+" 분</b>" + " 을 아꼈습니다.")));
                 saveMoneyTitle.setText(Html.fromHtml("<b>"+(str_getSaveMoney +" 원</b>" +" 을 아꼈습니다.")));
                 tooltipTextView.setText(Html.fromHtml("<b>"+(Math.round(saveKcal)+" kcal</b>" + " 를 참았습니다.")));
->>>>>>> Stashed changes
 
                 str_smokeBank = documentSnapshot.getString("smoke_bank");
                 DecimalFormat formatter = new DecimalFormat("###,###,###");// 수에 콤마 넣기
