@@ -16,13 +16,31 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="tabTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- 탭 테마 -->
         <item name="android:textSize">24dp</item>
-        <item name="android:textColorPrimary">@android:color/holo_blue_bright</item>       <!-- 탭바 선택된 텍스트 색 -->
+        <item name="android:textColorPrimary">@android:color/holo_blue_bright
+        </item>       <!-- 탭바 선택된 텍스트 색 -->
         <item name="android:textColorSecondary">@android:color/white</item>     <!-- 탭바 텍스트 색 -->
         <item name="tabIndicatorColor">@android:color/holo_blue_bright</item>      <!-- 탭바 선택시 색 -->
-        <item name="colorAccent">@android:color/holo_blue_bright</item>            <!-- 하단 움직이는 바 색-->
+        <item name="colorAccent">@android:color/holo_blue_bright
+        </item>            <!-- 하단 움직이는 바 색-->
     </style>
+
+<!--    <style name="Theme.StopKing_project.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">-->
+<!--        &lt;!&ndash; Radius of the outer bound of widgets to make the rounded corners &ndash;&gt;-->
+<!--        <item name="appWidgetRadius">16dp</item>-->
+<!--        &lt;!&ndash;-->
+<!--        Radius of the inner view's bound of widgets to make the rounded corners.-->
+<!--        It needs to be 8dp or less than the value of appWidgetRadius-->
+<!--        &ndash;&gt;-->
+<!--        <item name="appWidgetInnerRadius">8dp</item>-->
+<!--    </style>-->
+
+<!--    <style name="Theme.StopKing_project.AppWidgetContainer" parent="Theme.StopKing_project.AppWidgetContainerParent">-->
+<!--        &lt;!&ndash; Apply padding to avoid the content of the widget colliding with the rounded corners &ndash;&gt;-->
+<!--        <item name="appWidgetPadding">16dp</item>-->
+<!--    </style>-->
 
 </resources>

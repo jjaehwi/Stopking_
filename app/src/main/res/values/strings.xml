@@ -9,4 +9,7 @@
     <string name="startSmoke_underline">흡연 <u><font color='#2196F3'><b>시작년도를</b></font></u> 입력해주세요!</string>
     <string name="smokeBank_underline">담뱃값을 절약하여 <u><font color='#2196F3'><b>모으고 싶은 금액</b></font></u>을\n 입력해주세요!</string>
     <string name="Ranking_title">Ranking</string>
+    <string name="appwidget_text">금주한 지: </string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
