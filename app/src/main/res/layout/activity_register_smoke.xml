@@ -162,6 +162,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="right"
             android:hint="예 : 2022"
+            android:inputType="number"
             android:textSize="24dp"/>
 
         <TextView

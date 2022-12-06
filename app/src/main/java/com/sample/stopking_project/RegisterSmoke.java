@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class RegisterSmoke extends AppCompatActivity {
 
     private FirebaseAuth mAuth;                                      // 파이어베이스 인증
@@ -25,6 +28,7 @@ public class RegisterSmoke extends AppCompatActivity {
     private Button mbtnCancel;                                       // 뒤로가기 버튼
     private String getName;
     private String selectAvgSmoke, selectDate;
+    private String getYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,12 @@ public class RegisterSmoke extends AppCompatActivity {
                 finish();
             }
         });
+
+        // 현재 년도보다 큰 값을 입력했는지 확인하기 위한 절차
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+        getYear = dateFormat.format(date);
 
         // 몇 갑인지 버튼 클릭 후 선택
         mbtnAvgSmoke.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +101,12 @@ public class RegisterSmoke extends AppCompatActivity {
                 }else if (mEtStartSmoke.getText().toString().equals("") || mEtStartSmoke.getText().toString() == null) {
                     //2번 항목 입력 안 했을 경우.
                     Toast.makeText(RegisterSmoke.this, "2번 항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                } else if (mEtSmokeBank.getText().toString().equals("") || mEtSmokeBank.getText().toString() == null) {
+                }
+                else if (mEtStartSmoke.getText().toString().compareTo(getYear) > 0)
+                {
+                    //현재 년도보다 크게 입력하였을 경우.
+                    Toast.makeText(RegisterSmoke.this, "시작 년도를 올바르게 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }else if (mEtSmokeBank.getText().toString().equals("") || mEtSmokeBank.getText().toString() == null) {
                     //금연 저금통 입력을 안 했을 경우.
                     Toast.makeText(RegisterSmoke.this, "3번 항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else if (Integer.parseInt(mEtSmokeBank.getText().toString()) <= 4499) {

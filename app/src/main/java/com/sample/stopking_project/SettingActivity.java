@@ -251,6 +251,7 @@ public class SettingActivity extends AppCompatActivity {
 
                 //로그인 화면으로 이동.
                 Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
                 Toast.makeText(SettingActivity.this, "로그아웃에 성공하였습니다.", Toast.LENGTH_SHORT).show();
@@ -272,7 +273,7 @@ public class SettingActivity extends AppCompatActivity {
     public void user_delete(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("주의");
-        builder.setMessage("회원탈퇴 시 앱이 종료되며, 앱을 재실행해주셔야 합니다. 정말 회원탈퇴를 하시겠습니까?");
+        builder.setMessage("회원님의 정보가 모두 삭제됩니다.\n 정말 회원탈퇴를 하시겠습니까?");
         builder.setIcon(R.drawable.caution);
 
         builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
@@ -280,6 +281,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // 회원 탈퇴하기
                 mAuth.getCurrentUser().delete();
+                mAuth.signOut();
 
                 db.collection("users").whereEqualTo("email",getEmail).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -300,7 +302,11 @@ public class SettingActivity extends AppCompatActivity {
                 });
                 //로그인 화면으로 이동.
                 Toast.makeText(SettingActivity.this, "회원탈퇴가 정상적으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
-                ActivityCompat.finishAffinity(SettingActivity.this);
+                //로그인 화면으로 이동.
+                Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             }
         });
 

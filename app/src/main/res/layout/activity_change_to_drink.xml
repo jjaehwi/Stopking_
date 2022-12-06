@@ -109,6 +109,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
+        android:text="- 최소 5,000원 이상 입력해주세요."
+        android:textSize="16dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:text="- 이 금액은 추후에 변경할 수 있어요!"
         android:textSize="16dp"
         android:textColor="@color/black"/>
