@@ -26,6 +26,7 @@
             android:text="제목"
             android:textSize="22dp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView
@@ -36,6 +37,7 @@
             android:layout_marginStart="16dp"
             android:text="줄거리"
             android:textSize="15dp"
+            android:textColor="@color/black"
             android:maxLines="3"
             android:ellipsize="end"
             app:layout_constraintStart_toEndOf="@+id/imageView"

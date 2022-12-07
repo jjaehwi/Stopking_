@@ -20,6 +20,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
+            app:tint="#2196F3"
             android:src="@drawable/back_button_image" />
 
         <TextView
@@ -29,6 +30,7 @@
             android:text="금연 도움"
             android:textSize="48dp"
             android:textStyle="bold"
+            android:textColor="#2196F3"
             android:layout_gravity="center|top" />
     </LinearLayout>
     <View
