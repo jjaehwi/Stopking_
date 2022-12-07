@@ -3,6 +3,7 @@ package com.sample.stopking_project;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,6 +68,7 @@ public class MyInfoActivity extends AppCompatActivity {
     private int average_drink_int;
     private int week_drink_int;
     private int weeklySmoke;
+    private double user_stop_packs; // 몇 갑 참았는지
 
     private double drinkFrequecny,bottleTotal;
     private double pack;
@@ -87,18 +89,18 @@ public class MyInfoActivity extends AppCompatActivity {
     // 금주 절약 금액 계산을 위한 함수
     public static String caculateBank(int average_drink, int week_drink, int days) {
         int drink_price = 4500;
-        int week = days / 7;
-        int result = week * average_drink * week_drink * drink_price;
+        double week =Math.round((double)days / 7);
+        double result = week * average_drink * week_drink * drink_price;
         DecimalFormat formatter = new DecimalFormat("###,###");  // 수에 콤마 넣기
         String result_str = formatter.format(result);
         return result_str;
     }
 
     // 금연 절약 금액 계산을 위한 함수
-    public static String caculateSmokeBank(int week_smoke, int days) {
+    public static String caculateSmokeBank(double user_stop_packs, int days) {
         int smoke_price = 4500;
-        int week = days / 7;
-        int result = week * week_smoke * smoke_price;
+        Log.d("TEST", "user_stop_packs" + user_stop_packs);
+        double result = Math.round(user_stop_packs * smoke_price);
         DecimalFormat formatter = new DecimalFormat("###,###");  // 수에 콤마 넣기
         String result_str = formatter.format(result);
         return result_str;
@@ -209,6 +211,7 @@ public class MyInfoActivity extends AppCompatActivity {
                     average_drink_int = Integer.parseInt(str_avg_drink);
                     week_drink_int = Integer.parseInt(str_weekDrink);
                     str_drinkBank = caculateBank(average_drink_int, week_drink_int, stop_drinkDay);
+
                     drinkBank.setText(str_drinkBank + "원");
                     drinkBank.setTypeface(null, Typeface.BOLD);
                     drinkBank.setTextColor(Color.BLACK);
@@ -243,15 +246,6 @@ public class MyInfoActivity extends AppCompatActivity {
                     stopSmokeDate.setTextColor(Color.BLACK);
                 }
 
-                // 일주일에 태우는 담배 갑 개수
-                str_weekCountCiga = documentSnapshot.getString("week_smoke");
-                if (str_weekCountCiga != null) {
-                    weeklySmoke = Integer.parseInt(str_weekCountCiga); // 참은 담배 갑 개수를 위한 변수 설정
-                    weekCountCiga.setText(str_weekCountCiga + " 갑");
-                    weekCountCiga.setTypeface(null, Typeface.BOLD);
-                    weekCountCiga.setTextColor(Color.BLACK);
-                }
-
                 // 금연 일수
                 String smoke_day_info_text = documentSnapshot.getString(("stop_smoke"));
                 if (smoke_day_info_text != null)
@@ -271,18 +265,32 @@ public class MyInfoActivity extends AppCompatActivity {
                     dayStopSmoke.setTextColor(Color.BLACK);
                 }
 
+                // 일주일에 태우는 담배 갑 개수 및 금연 저금통
+                str_weekCountCiga = documentSnapshot.getString("week_smoke");
+                if (str_weekCountCiga != null) {
+                    //일주일에 태우는 담배 갑 개수 띄우기
+                    weekCountCiga.setText(str_weekCountCiga + " 갑");
+                    weekCountCiga.setTypeface(null, Typeface.BOLD);
+                    weekCountCiga.setTextColor(Color.BLACK);
 
-                //금연 저금통
-                String week_smoke_str = documentSnapshot.getString("week_smoke");
-                if (week_smoke_str != null)
-                {
-                    int week_smoke_int = Integer.parseInt(week_smoke_str);
+                    //금연 저금통 띄우기
+                    weeklySmoke = Integer.parseInt(str_weekCountCiga); // 참은 담배 갑 개수를 위한 변수 설정
 
-                    str_smokeBank = caculateSmokeBank(week_smoke_int, stop_smokeDay);
-                    smokeBank.setText(str_smokeBank + "원");
+                    if (stop_smokeDay > 0 && stop_smokeDay < 7)
+                    {
+                        user_stop_packs = Math.round((double)stop_smokeDay);
+                    }
+                    else if (stop_smokeDay >= 7)
+                    {
+                        user_stop_packs = Math.round(((Math.round((double)stop_smokeDay / 7)) * weeklySmoke));
+                    }
+
+                    str_smokeBank = caculateSmokeBank(user_stop_packs, stop_smokeDay);
+                    smokeBank.setText(str_smokeBank + " 원");
                     smokeBank.setTypeface(null, Typeface.BOLD);
                     smokeBank.setTextColor(Color.BLACK);
                 }
+
 
 
                 //내가 참은 갑 개수는 구현 예정.

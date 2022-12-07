@@ -3,6 +3,7 @@ package com.sample.stopking_project;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private CheckBox cDrink, cSmoke;    //금연, 금주 선택
     DatePickerDialog dpd;
     private String selectDate;
+    private int btnflag=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +69,18 @@ public class RegisterActivity extends AppCompatActivity {
                         month = month + 1;
                         if(0<month && month<10){
                             getMonth = "0" + month;
+                            Log.d("TEST", "getMonth : "+ getMonth);
                         } else getMonth = String.valueOf(month);
-                        if(0<day && month<10){
+                        if(0<day && day<10){
                             getDay = "0" + day;
+                            Log.d("TEST", "getDay : "+ getDay);
                         } else getDay = String.valueOf(day);
-
                         selectDate = year + "/" + getMonth + "/" + getDay;
+                        Log.d("TEST", "selectDate : "+ selectDate);
+                        if (selectDate != null)
+                        {
+                            mbtnDate.setText(selectDate);
+                        }
                     }
                 }, nYear, nMonth, nDay);
                 dpd.show();

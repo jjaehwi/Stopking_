@@ -64,7 +64,7 @@ public class Drink_MainActivity extends AppCompatActivity {
 
     public static String caculateBank(int average_drink, int week_drink, int days) { // 절약 금액 계산
         int drink_price = 4500;
-        double week = Math.round((double)days / 7);
+        double week =Math.round((double)days / 7);
         double result = week * average_drink * week_drink * drink_price;
         DecimalFormat formatter = new DecimalFormat("###,###");  // 수에 콤마 넣기
         String result_str = formatter.format(result);
@@ -177,6 +177,7 @@ public class Drink_MainActivity extends AppCompatActivity {
         });
 
         dbReference.orderBy("stop_drink")
+                .whereNotEqualTo("stop_drink",null)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -115,9 +115,11 @@
         android:layout_marginTop="50dp"
         android:textSize="24dp"/>
 
+
+
     <EditText
         android:id="@+id/et_email"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
@@ -143,14 +145,63 @@
         android:textSize="16dp"
         android:textColor="@color/black"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
     <EditText
         android:id="@+id/et_pwd"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:hint="비밀번호 입력"
         android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/button_checkEmail"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/auth"
+        android:text="인증"
+        android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:text="- 비밀번호 입력 후, 인증 버튼을 눌러주세요!"
+        android:textSize="16dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_emailCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:text="- 이메일 인증을 완료하였다면, \n  진행중 버튼을 한 번 더 클릭해주세요!"
+        android:textSize="16dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_completeEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="- 이메일 인증이 완료되었어요! \n  회원가입 완료를 눌러주세요!"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:visibility="invisible" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

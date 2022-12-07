@@ -108,10 +108,14 @@ public class ChangeToSmoke extends AppCompatActivity {
                         if(0<month && month<10){
                             getMonth = "0" + month;
                         } else getMonth = String.valueOf(month);
-                        if(0<day && month<10){
+                        if(0<day && day<10){
                             getDay = "0" + day;
                         } else getDay = String.valueOf(day);
                         date = year + "/" + getMonth + "/" + getDay;
+                        if (date != null)
+                        {
+                            mbtnDate.setText(date);
+                        }
                     }
                 }, nYear, nMonth, nDay);
                 dpd.show();

@@ -127,7 +127,11 @@ public class SettingActivity extends AppCompatActivity {
                 else
                 {
                     builder.setTitle("주의");
-                    builder.setMessage("정말 변경하시겠습니까?");
+                    if ((task.getResult().getString("flag")).compareTo("drink") == 0)
+                        builder.setMessage("금주에서 금연테마로 변경하시겠습니까?");
+                    else if ((task.getResult().getString("flag")).compareTo("smoke") == 0)
+                        builder.setMessage("금연에서 금주테마로 변경하시겠습니까?");
+
                     builder.setIcon(R.drawable.caution);
 
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {

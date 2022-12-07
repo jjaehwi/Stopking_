@@ -45,6 +45,7 @@
                             android:layout_marginLeft="40dp"
                             android:text="Statistics"
                             android:textSize="48dp"
+                            android:textColor="#2196F3"
                             android:textStyle="bold"
                             android:layout_gravity="center|top" />
 
@@ -67,12 +68,14 @@
                             android:text="000 님은"
                             android:layout_marginTop="15dp"
                             android:layout_marginLeft="25dp"
+                            android:textColor="@color/black"
                             android:textSize="56dp" />
                         <TextView
                             android:id="@+id/dayTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 일 동안,"
+                            android:textColor="@color/black"
                             android:textSize="56dp"
                             android:layout_below="@id/userNameTitle1"
                             android:layout_marginLeft="100dp"
@@ -82,6 +85,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 번의 음주를 쉬었습니다."
+                            android:textColor="@color/black"
                             android:textSize="28dp"
                             android:layout_marginTop="40dp"
                             android:layout_marginLeft="20dp"
@@ -91,6 +95,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="000 병을 마시지 않았습니다."
+                            android:textColor="@color/black"
                             android:textSize="28dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="20dp"
@@ -100,6 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00 시간을 아꼈습니다."
+                            android:textColor="@color/black"
                             android:textSize="28dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="20dp"
@@ -109,6 +115,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00000 원을 아꼈습니다."
+                            android:textColor="@color/black"
                             android:textSize="26dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="20dp"
@@ -129,6 +136,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0000 칼로리를 참았습니다."
+                            android:textColor="@color/black"
                             android:textSize="26dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="20dp"
@@ -147,6 +155,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="현재까지 모은 금액"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="42dp"
                             android:layout_marginTop="25dp"
@@ -170,6 +179,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="목표 금액 : "
+                                android:textColor="@color/black"
                                 android:textSize="25dp" />
                             <TextView
                                 android:id="@+id/goalMoneyText"
@@ -177,6 +187,7 @@
                                 android:layout_height="match_parent"
                                 android:text="250000"
                                 android:textSize="25dp"
+                                android:textColor="@color/black"
                                 tools:context=".Drink_Statistics"/>
                             <TextView
                                 android:layout_width="match_parent"
@@ -204,6 +215,7 @@
                             android:id="@+id/cheerText"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:textColor="@color/black"
                             android:text="티끌 모아 태산! \n목표까지 달려봐요!"
                             android:textSize="25dp"
                             android:textStyle="italic"
@@ -223,6 +235,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="목표 금액 재설정하기"
+                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="20dp"/>
                     </LinearLayout>

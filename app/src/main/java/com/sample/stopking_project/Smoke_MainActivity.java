@@ -125,9 +125,15 @@ public class Smoke_MainActivity extends AppCompatActivity {
                 week_smoke_str = documentSnapshot.getString("week_smoke");
                 int week_smoke_int = Integer.parseInt(week_smoke_str);
 
-
-                user_stop_packs = Math.round(((Math.round((double)user_stop_days / 7)) * week_smoke_int));
-                System.out.println("packs: "+user_stop_packs);
+                if (user_stop_days > 0 && user_stop_days < 7)
+                {
+                    user_stop_packs = Math.round((double)user_stop_days);
+                }
+                else if (user_stop_days >= 7)
+                {
+                    user_stop_packs = Math.round(((Math.round((double)user_stop_days / 7)) * week_smoke_int));
+                }
+                //System.out.println("packs: "+user_stop_packs);
                 bank_info_text = caculateBank(user_stop_packs, user_stop_days);
                 bank_info.setText(bank_info_text + "원");
             }
