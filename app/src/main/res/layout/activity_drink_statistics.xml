@@ -37,6 +37,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
+                            app:tint="#2196F3"
                             android:src="@drawable/back_button_image" />
 
                         <TextView
@@ -264,6 +265,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
+                            app:tint="#2196F3"
                             android:src="@drawable/back_button_image" />
 
                         <TextView
@@ -273,6 +275,7 @@
                             android:text="Statistics"
                             android:textSize="48dp"
                             android:textStyle="bold"
+                            android:textColor="#0F9FFF"
                             android:layout_gravity="center|top" />
                     </LinearLayout>
 
@@ -293,7 +296,8 @@
                         android:layout_marginTop="15dp"
                         android:text="000 님은"
                         android:layout_gravity="center"
-                        android:textSize="56dp" />
+                        android:textSize="56dp"
+                        android:textColor="@color/black"/>
                     <TextView
                         android:id="@+id/Days"
                         android:layout_width="wrap_content"
@@ -301,7 +305,8 @@
                         android:layout_marginTop="25dp"
                         android:text="91 일 동안 금주하셨네요"
                         android:layout_gravity="center"
-                        android:textSize="32dp" />
+                        android:textSize="32dp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -313,7 +318,8 @@
                             android:text="그동안 금주를 통해 \n다음과 같은 효과를 얻었습니다."
                             android:textSize="24dp"
                             android:layout_marginTop="25dp"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:id="@+id/text1"
                             android:layout_width="wrap_content"
@@ -323,7 +329,7 @@
                             android:textStyle="bold"
                             android:enabled="false"
                             android:layout_marginTop="25dp"
-                            android:layout_marginLeft="30dp"/>
+                            android:layout_marginLeft="30dp" />
 
                         <TextView
                             android:id="@+id/text2"
@@ -364,7 +370,8 @@
                             android:text="⚠️ 3개월 이상의 금주가 필요합니다."
                             android:layout_gravity="end"
                             android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:id="@+id/text5"
@@ -375,7 +382,8 @@
                             android:textStyle="bold"
                             android:enabled="false"
                             android:layout_marginTop="25dp"
-                            android:layout_marginLeft="30dp"/>
+                            android:layout_marginLeft="30dp"
+                            />
                         <TextView
                             android:id="@+id/guidetext2"
                             android:layout_width="wrap_content"
@@ -383,7 +391,9 @@
                             android:text="⚠️ 6개월 이상의 금주가 필요합니다."
                             android:layout_gravity="end"
                             android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            android:textColor="@color/black"
+                            />
 
                         <TextView
                             android:id="@+id/text6"
@@ -394,7 +404,8 @@
                             android:textStyle="bold"
                             android:enabled="false"
                             android:layout_marginTop="25dp"
-                            android:layout_marginLeft="30dp"/>
+                            android:layout_marginLeft="30dp"
+                            />
                         <TextView
                             android:id="@+id/guidetext3"
                             android:layout_width="wrap_content"
@@ -402,14 +413,16 @@
                             android:text="⚠️ 1년 이상의 금주가 필요합니다."
                             android:layout_gravity="end"
                             android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="다음 목표까지 열심히 달려보세요!"
                             android:textSize="24dp"
                             android:layout_marginTop="25dp"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:id="@+id/currentDay"
                             android:layout_width="wrap_content"
@@ -418,7 +431,8 @@
                             android:textSize="15dp"
                             android:textStyle="bold"
                             android:layout_gravity="center"
-                            android:layout_marginTop="24dp" />
+                            android:layout_marginTop="24dp"
+                            android:textColor="@color/black"/>
                         <com.google.android.material.progressindicator.CircularProgressIndicator
                             android:id="@+id/progressbar2"
                             android:layout_width="wrap_content"
@@ -432,7 +446,8 @@
                             android:text="목표 365일"
                             android:textSize="15dp"
                             android:textStyle="bold"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            android:textColor="@color/black"/>
                         </LinearLayout>
                     </LinearLayout>
                 </ScrollView>

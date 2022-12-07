@@ -228,17 +228,23 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
             textView1.setEnabled(true);
             textView2.setEnabled(true);
             textView3.setEnabled(true);
+            textView1.setTextColor(Color.BLACK);
+            textView2.setTextColor(Color.BLACK);
+            textView3.setTextColor(Color.BLACK);
         }
         if(stopDays > 90) {
             textView4.setEnabled(true);
+            textView4.setTextColor(Color.BLACK);
             guideText1.setVisibility(View.GONE);
         }
         if(stopDays > 180){
             textView5.setEnabled(true);
+            textView5.setTextColor(Color.BLACK);
             guideText2.setVisibility(View.GONE);
         }
         if(stopDays > 365){
             textView6.setEnabled(true);
+            textView6.setTextColor(Color.BLACK);
             guideText3.setVisibility(View.GONE);
         }
 
