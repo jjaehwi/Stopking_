@@ -66,6 +66,7 @@ public class Smoke_RankingActivity extends AppCompatActivity implements View.OnC
         btn_stop_smoke_day.setOnClickListener(this);
         btn_stop_smoke_pack.setOnClickListener(this);
         callFragment(FRAGMENT_DAY, bundle);
+        backButton.bringToFront();
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

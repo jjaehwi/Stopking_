@@ -7,6 +7,17 @@
     tools:context=".Smoke_RankingActivity">
 
 
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/back_button_image"
+        app:tint="#2196F3"
+        ></ImageView>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,14 +35,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout" />
 
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_height="30dp"
-        android:layout_width="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/back_button_image"
-        ></ImageView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="@string/Ranking_title"
         android:gravity="center"
+        android:textStyle="bold"
         android:textSize="40dp"
         android:textColor="#0F9FFF"
         ></TextView>

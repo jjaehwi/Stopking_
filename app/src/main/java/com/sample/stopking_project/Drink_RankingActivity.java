@@ -60,6 +60,8 @@ public class Drink_RankingActivity extends AppCompatActivity implements View.OnC
         btn_stop_drink_bottle.setOnClickListener(this);
         callFragment(FRAGMENT_DAY, bundle);
 
+
+        backButton.bringToFront(); // z-index를 최상위로
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
