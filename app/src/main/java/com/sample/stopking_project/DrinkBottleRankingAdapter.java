@@ -35,7 +35,7 @@ public class DrinkBottleRankingAdapter extends RecyclerView.Adapter<DrinkBottleR
     public void onBindViewHolder(@NonNull RankingViewHolder holder, int position) {
         //그림 필요 시 필요.
         holder.user_name.setText(arrayList.get(position).getName());
-        holder.user_bottles.setText(String.valueOf(arrayList.get(position).getBottles()) +"병");
+        holder.user_bottles.setText(String.valueOf(arrayList.get(position).getDoubleBottles()) +"병");
         holder.user_rank.setText(rank +"위");
         holder.user_average_drink.setText("평균 주량: "+ arrayList.get(position).getAverage_drink()+"병");
         rank+=1;

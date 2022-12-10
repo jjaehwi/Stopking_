@@ -1,13 +1,16 @@
 package com.sample.stopking_project;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +34,8 @@ public class Drink_RankingActivity extends AppCompatActivity implements View.OnC
     private Button btn_stop_drink_day, btn_stop_drink_bottle;
     boolean btn_day_active = true;
     boolean btn_bottle_active = false;
+    private Drink_FragmentDay fragmentDay;
+    private Drink_FragmentBottle fragmentBottle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,20 @@ public class Drink_RankingActivity extends AppCompatActivity implements View.OnC
                 finish();
             }
         });
+
+
+        ProgressDialog progressDialog = new ProgressDialog(Drink_RankingActivity.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("잠시 기다려 주세요.");
+        progressDialog.show();
+
+        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 1000);
+
 
 
     }
@@ -114,24 +133,43 @@ public class Drink_RankingActivity extends AppCompatActivity implements View.OnC
     private void callFragment(int fragment_no, Bundle bundle) {
 
         // 프래그먼트 사용을 위해
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentManager manager = getSupportFragmentManager();
 
         switch (fragment_no) {
             case 1:
-                // '프래그먼트1' 호출
-
-                Drink_FragmentDay fragmentDay = new Drink_FragmentDay();
-                fragmentDay.setArguments(bundle);
-                fragmentTransaction.replace(R.id.drink_fragment_container, fragmentDay);
-                fragmentTransaction.commit();
+                // '프래그먼트DAY' 호출
+                if(fragmentDay == null){
+                    fragmentDay = new Drink_FragmentDay();
+                    fragmentDay.setArguments(bundle);
+                    manager.beginTransaction().add(R.id.drink_fragment_container,fragmentDay).commit();
+                }
+                if(fragmentDay!=null) manager.beginTransaction().show(fragmentDay).commit();
+                if(fragmentBottle!=null) manager.beginTransaction().hide(fragmentBottle).commit();
                 break;
 
             case 2:
-                // '프래그먼트2' 호출
-                Drink_FragmentBottle fragmentBottle = new Drink_FragmentBottle();
-                fragmentBottle.setArguments(bundle);
-                fragmentTransaction.replace(R.id.drink_fragment_container, fragmentBottle);
-                fragmentTransaction.commit();
+                // '프래그먼트BOTTLE' 호출
+
+                if(fragmentBottle == null){
+                    ProgressDialog progressDialog = new ProgressDialog(Drink_RankingActivity.this);
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.setMessage("잠시 기다려 주세요.");
+                    progressDialog.show();
+
+                    new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                        }
+                    }, 1000);
+
+                    fragmentBottle = new Drink_FragmentBottle();
+                    fragmentBottle.setArguments(bundle);
+                    manager.beginTransaction().add(R.id.drink_fragment_container,fragmentBottle).commit();
+                }
+                if(fragmentBottle!=null) manager.beginTransaction().show(fragmentBottle).commit();
+                if(fragmentDay!=null) manager.beginTransaction().hide(fragmentDay).commit();
+
                 break;
         }
     }

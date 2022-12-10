@@ -217,6 +217,7 @@ public class Drink_MainActivity extends AppCompatActivity {
                 if(result_int>0) {
                     String goal_text = String.valueOf(result_int);
                     bank_goal.setText("D - "+ goal_text);
+                    bank_goal.setVisibility(View.VISIBLE);
                 } else {
                     bank_goal_title.setText("목표 달성!");
                     bank_goal.setVisibility(View.GONE);

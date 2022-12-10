@@ -145,15 +145,15 @@ public class Drink_FragmentBottle extends Fragment {
 
 
                             first_rank_name.setText(list.get(0).getName());
-                            first_rank_bottle.setText(list.get(0).getBottles() + "병");
+                            first_rank_bottle.setText(list.get(0).getDoubleBottles() + "병");
                             first_rank_average.setText("평균 주량 : "+list.get(0).getAverage_drink()+"병");
                             list.remove(0); // 리사이클러뷰에 넣을 데이터는 4위부터이므로 제거
                             second_rank_name.setText(list.get(0).getName());
-                            second_rank_bottle.setText(list.get(0).getBottles() + "병");
+                            second_rank_bottle.setText(list.get(0).getDoubleBottles() + "병");
                             second_rank_average.setText("평균 주량 : "+list.get(0).getAverage_drink()+"병");
                             list.remove(0);
                             third_rank_name.setText(list.get(0).getName());
-                            third_rank_bottle.setText(list.get(0).getBottles() + "병");
+                            third_rank_bottle.setText(list.get(0).getDoubleBottles() + "병");
                             third_rank_average.setText("평균 주량 : "+list.get(0).getAverage_drink()+"병");
                             list.remove(0);
                             adapter.notifyDataSetChanged(); // 리시트 저장 및 새로고침

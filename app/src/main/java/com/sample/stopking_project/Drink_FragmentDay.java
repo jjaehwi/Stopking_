@@ -1,5 +1,6 @@
 package com.sample.stopking_project;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -122,7 +123,9 @@ public  class Drink_FragmentDay extends Fragment {
                     }
                 });
 
-        AggregateQuery countQuery = db.collection("users").count();
+        AggregateQuery countQuery = db.collection("users")
+                .whereNotEqualTo("stop_drink",null)
+                .count();
         countQuery.get(AggregateSource.SERVER).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 AggregateQuerySnapshot snapshot = task.getResult();
@@ -229,6 +232,7 @@ public  class Drink_FragmentDay extends Fragment {
         TextView my_ranking_day = v.findViewById(R.id.drink_my_ranking_day);
         my_ranking_name.setText(getName);
         my_ranking_day.setText(getDay + "일");
+
 
         // Inflate the layout for this fragment
         return v;

@@ -55,6 +55,8 @@ dependencies {
 
     // 툴팁 라이브러리
     implementation 'com.tomergoldst.android:tooltips:1.1.1'
+    // 상위 SDK 버젼을 위한 Notification implementation
+    implementation 'androidx.work:work-runtime:2.7.1'
 
     // 웹 크롤링 하기 위한 jsoup 라이브러리
     implementation 'org.jsoup:jsoup:1.12.1'

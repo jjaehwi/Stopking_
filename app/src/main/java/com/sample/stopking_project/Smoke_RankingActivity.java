@@ -1,13 +1,16 @@
 package com.sample.stopking_project;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +34,8 @@ public class Smoke_RankingActivity extends AppCompatActivity implements View.OnC
     private Button btn_stop_smoke_day, btn_stop_smoke_pack;
     boolean btn_day_active = true;
     boolean btn_pack_active = false;
+    private Smoke_FragmentDay fragmentDay;
+    private Smoke_FragmentPack fragmentPack;
 
 
 
@@ -75,6 +80,19 @@ public class Smoke_RankingActivity extends AppCompatActivity implements View.OnC
                 finish();
             }
         });
+
+        ProgressDialog progressDialog = new ProgressDialog(Smoke_RankingActivity.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("잠시 기다려 주세요.");
+        progressDialog.show();
+
+        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 1000);
+
     }
 
 
@@ -118,25 +136,65 @@ public class Smoke_RankingActivity extends AppCompatActivity implements View.OnC
     private void callFragment(int fragment_no, Bundle bundle) {
 
         // 프래그먼트 사용을 위해
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentManager manager = getSupportFragmentManager();
 
         switch (fragment_no) {
             case 1:
-                // '프래그먼트1' 호출
-
-                Smoke_FragmentDay fragmentDay = new Smoke_FragmentDay();
-                fragmentDay.setArguments(bundle);
-                fragmentTransaction.replace(R.id.smoke_fragment_container, fragmentDay);
-                fragmentTransaction.commit();
+                // '프래그먼트DAY' 호출
+                if(fragmentDay == null){
+                    fragmentDay = new Smoke_FragmentDay();
+                    fragmentDay.setArguments(bundle);
+                    manager.beginTransaction().add(R.id.smoke_fragment_container,fragmentDay).commit();
+                }
+                if(fragmentDay!=null) manager.beginTransaction().show(fragmentDay).commit();
+                if(fragmentPack!=null) manager.beginTransaction().hide(fragmentPack).commit();
                 break;
 
             case 2:
-                // '프래그먼트2' 호출
-                Smoke_FragmentPack fragmentPack = new Smoke_FragmentPack();
-                fragmentPack.setArguments(bundle);
-                fragmentTransaction.replace(R.id.smoke_fragment_container, fragmentPack);
-                fragmentTransaction.commit();
+                // '프래그먼트BOTTLE' 호출
+
+                if(fragmentPack == null){
+                    ProgressDialog progressDialog = new ProgressDialog(Smoke_RankingActivity.this);
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.setMessage("잠시 기다려 주세요.");
+                    progressDialog.show();
+
+                    new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                        }
+                    }, 1000);
+
+                    fragmentPack = new Smoke_FragmentPack();
+                    fragmentPack.setArguments(bundle);
+                    manager.beginTransaction().add(R.id.smoke_fragment_container,fragmentPack).commit();
+                }
+                if(fragmentPack!=null) manager.beginTransaction().show(fragmentPack).commit();
+                if(fragmentDay!=null) manager.beginTransaction().hide(fragmentDay).commit();
+
                 break;
         }
     }
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//
+//        switch (fragment_no) {
+//            case 1:
+//                // '프래그먼트1' 호출
+//
+//                Smoke_FragmentDay fragmentDay = new Smoke_FragmentDay();
+//                fragmentDay.setArguments(bundle);
+//                fragmentTransaction.replace(R.id.smoke_fragment_container, fragmentDay);
+//                fragmentTransaction.commit();
+//                break;
+//
+//            case 2:
+//                // '프래그먼트2' 호출
+//                Smoke_FragmentPack fragmentPack = new Smoke_FragmentPack();
+//                fragmentPack.setArguments(bundle);
+//                fragmentTransaction.replace(R.id.smoke_fragment_container, fragmentPack);
+//                fragmentTransaction.commit();
+//                break;
+//        }
+//    }
 }
