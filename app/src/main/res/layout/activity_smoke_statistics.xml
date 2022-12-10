@@ -313,7 +313,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="그동안 금연를 통해 \n다음과 같은 효과를 얻었습니다."
+                        android:text="그동안 금연을 통해 \n다음과 같은 효과를 얻었습니다."
                         android:textSize="24dp"
                         android:textColor="@color/black"
                         android:layout_marginTop="25dp"
@@ -411,6 +411,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"/>
                     <TextView
+                        android:id="@+id/cheerText2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="다음 목표까지 열심히 달려보세요!"
@@ -436,6 +437,7 @@
                         app:indicatorSize="225dp"
                         app:indicatorColor="@color/teal_200" />
                     <TextView
+                        android:id="@+id/goalDay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="목표 365일"

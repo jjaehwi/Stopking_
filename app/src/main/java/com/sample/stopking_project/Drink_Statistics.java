@@ -42,8 +42,8 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
     TextView userNameTitle1, dayTitle, drinkFrequencyTitle, countBottlesTitle, saveTimeTitle, saveMoneyTitle;
     TextView tooltipTextView, saveMoneyText, goalMoneyText, progressRatio, cheerText;
     Button goalMoneyButton;
-    TextView textView1, textView2, textView3, textView4, textView5, textView6, userNameTitle2;
-    TextView textDays, currentDays, guideText1, guideText2, guideText3;
+    TextView textView1, textView2, textView3, textView4, textView5, textView6, userNameTitle2, cheerText2;
+    TextView textDays, currentDays, guideText1, guideText2, guideText3, goalDay;
     RelativeLayout linearLayout;
     ProgressBar progressBar1, progressBar2;
     ImageView btnBack, btnBack2;
@@ -195,12 +195,15 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
         textView4 = findViewById(R.id.text4);
         textView5 = findViewById(R.id.text5);
         textView6 = findViewById(R.id.text6);
+        cheerText2 = findViewById(R.id.cheerText2);
         userNameTitle2 = findViewById(R.id.userNameTitle2);
         guideText1 = findViewById(R.id.guidetext1);
         guideText2 = findViewById(R.id.guidetext2);
         guideText3 = findViewById(R.id.guidetext3);
+        goalDay = findViewById(R.id.goalDay);
         btnBack = findViewById(R.id.back_main);
         btnBack2 = findViewById(R.id.back_main2);
+
 
         getName = intent.getStringExtra("userName");
 
@@ -254,6 +257,10 @@ public class Drink_Statistics extends AppCompatActivity implements ToolTipsManag
         currentDays.setText("현재 "+str_StopDays+"일");
         double progressCalculate = ((double)(Integer.parseInt(str_StopDays) / (double)365)*100);
         progressBar2.setProgress((int)progressCalculate);
+        if(progressCalculate>=100){
+            cheerText2.setText("목표 달성! 이제 평생 끊어볼까요?");
+            goalDay.setText("목표 : 평생");
+        }
 
         // initialize tooltip manager
         toolTipsManager = new ToolTipsManager(this);
