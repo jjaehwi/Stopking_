@@ -182,10 +182,18 @@ public class SettingActivity extends AppCompatActivity {
     // 금연 / 금주 초기화 클릭 시 처리 함수
     public void initializeMenu(View v) {
         DocumentReference docRef = db.collection("users").document(getEmail);
-        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+
+//        DocumentReference docRef = db.collection("users").document(getEmail);
+//        docRef.get().addOnCompleteListener(this, new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+
+        docRef.get().addOnCompleteListener(this, new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                String flag = value.getString("flag");
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String flag = task.getResult().getString("flag");
+
                 if(flag.compareTo("drink")==0){ // 금주일 경우
                     AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
                     builder.setTitle("주의")
@@ -208,6 +216,7 @@ public class SettingActivity extends AppCompatActivity {
 
                                 }
                             });
+
                     initAlertDialog = builder.create();
                     if(!initAlertDialog.isShowing())initAlertDialog.show();
                 }
@@ -233,11 +242,14 @@ public class SettingActivity extends AppCompatActivity {
 
                                 }
                             });
+
                     initAlertDialog = builder.create();
                     if(!initAlertDialog.isShowing())initAlertDialog.show();
                 }
             }
+
         });
+
     }
 
     //로그아웃 클릭 시
