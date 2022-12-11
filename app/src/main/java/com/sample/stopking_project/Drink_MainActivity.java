@@ -126,7 +126,7 @@ public class Drink_MainActivity extends AppCompatActivity {
                 TextView bank_info = findViewById(R.id.bank_info);
 
                 String average_drink_str = documentSnapshot.getString("average_drink");
-                int average_drink_int = Integer.parseInt(average_drink_str);
+                int average_drink_int = Integer.parseInt(average_drink_str); // bottles
 
                 String week_drink_str = documentSnapshot.getString("week_drink");
                 int week_drink_int = Integer.parseInt(week_drink_str);

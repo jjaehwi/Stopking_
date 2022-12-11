@@ -172,6 +172,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:text="- 이메일 인증 후 이용하실 수 있습니다!"
+        android:textSize="16dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:text="- 비밀번호 입력 후, 인증 버튼을 눌러주세요!"
         android:textSize="16dp"
@@ -203,7 +211,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <Button

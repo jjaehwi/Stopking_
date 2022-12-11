@@ -116,6 +116,7 @@ public class Smoke_MainActivity extends AppCompatActivity {
             }
         });
 
+        //금연 저금통
         docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() { // 절약 금액 계산을 위한 데이터 fetch
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override

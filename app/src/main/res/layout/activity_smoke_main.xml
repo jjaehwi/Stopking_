@@ -260,7 +260,7 @@
                 android:textColor="#0099FF"
                 android:layout_marginTop="10dp"
                 android:visibility="gone"
-                android:text="재설정하러 가기"
+                android:text="재설정하기"
                 ></Button>
 
         </LinearLayout>
